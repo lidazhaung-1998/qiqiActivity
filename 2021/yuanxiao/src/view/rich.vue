@@ -24,19 +24,22 @@
         </contentHead>
         <div class="teamListTitle" :class="'teamListTitle'+selectIndex"></div>
         <list :titles="titles" :divide="true"></list>
+        <paginator @prev="prev" @next="next" :currPage="currPage" :totalPage="totalPage"></paginator>
     </div>
 </template>
 
 <script>
     import contentHead from "../components/contentHead/contentHead";
     import list from "../components/list/list";
-
+    import paginator from "../components/paginator/paginator";
     export default {
         name: "rich",
-        components: {contentHead, list},
+        components: {contentHead, list,paginator},
         data() {
             return {
                 selectIndex: 0,
+                currPage:0,
+                totalPage:4,
                 titles: [
                     "排名",
                     "昵称",
@@ -44,6 +47,14 @@
                     "神豪值",
                     "预计可获得奖池比例"
                 ]
+            }
+        },
+        methods:{
+            prev(){
+                this.currPage--;
+            },
+            next(){
+                this.currPage++;
             }
         }
     }
