@@ -1,0 +1,128 @@
+.list-wrap {
+    margin: 0 auto;
+    box-sizing: border-box;
+    background-color: #f34270;
+    border: 0.04rem solid #d91548;
+
+    .list-title {
+        height: .92rem;
+        color: #fff;
+        font-weight: bold;
+        font-size: .18rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        div:nth-child(2) {
+            width: .5rem;
+            line-height: 1.2;
+        }
+        div:nth-child(3) {
+            width: .5rem;
+            //line-height: 1.2;
+            text-align: center;
+        }
+        div:nth-child(4) {
+            width: 1rem;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        div:nth-child(5) {
+            width: .8rem;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        div:nth-child(7) {
+            width: .8rem;
+            line-height: 1.2;
+            text-align: center;
+        }
+    }
+
+    .list-content {
+        .list {
+            width: 100%;
+
+            .item:nth-of-type(2n+1) {
+                background-color: #ff81a2;
+            }
+
+            .item {
+                position: relative;
+                height: .65rem;
+                color: #fff;
+                font-size: .18rem;
+
+                div {
+                    text-align: center;
+                    line-height: .65rem;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    position: absolute;
+                }
+
+                .rank {
+                    width: .48rem;
+                    height: .34rem;
+                    line-height: .34rem;
+                    margin-top: 8.5px;
+                    background-size: 100% 100%;
+                    left: .02rem;
+                    font-size: .19rem;
+                }
+
+                .rank1 {
+                    color: #ff6e04;
+                    line-height: .47rem;
+                    background-image: url("../../assets/img/listNo1.png");
+                }
+
+                .rank2 {
+                    color: #6f6f6f;
+                    line-height: .47rem;
+                    background-image: url("../../assets/img/listNo2.png");
+                }
+
+                .rank3 {
+                    color: #982a0d;
+                    line-height: .47rem;
+                    background-image: url("../../assets/img/listNo3.png");
+                }
+
+                .name {
+                    width: 1.1rem;
+                    left: .6rem;
+                }
+
+                .uid {
+                    width: 1.15rem;
+                    left: 1.55rem;
+                }
+
+                .CardiacValue {
+                    width: 1rem;
+                    left: 2.8rem;
+                }
+
+                .sweetheart {
+                    width: 1.1rem;
+                    left: 4.05rem;
+                }
+
+                .uuid {
+                    width: 1.15rem;
+                    left: 4.93rem;
+                }
+
+                .sentValue {
+                    width: .8rem;
+                    left: 5.98rem;
+                }
+            }
+        }
+    }
+
+}

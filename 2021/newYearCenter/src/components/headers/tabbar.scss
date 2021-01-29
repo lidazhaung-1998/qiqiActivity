@@ -1,0 +1,67 @@
+.my-tabbar {
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    margin-top: -227px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.tabs1{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.tabs2{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.tabs {
+    width: 240px;
+    height: 70px;
+    font-weight: bold;
+    font-size: 34px;
+    color: #c3b8b8;
+    text-align: center;
+    line-height: 70px;
+    background-size: 100% 100%;
+    cursor: pointer;
+}
+
+.notSelect0 {
+    background-image: url("../../assets/img/leftTabDisabled.png");
+}
+
+.notSelect1 {
+    background-image: url("../../assets/img/centerTwoDisabled.png");
+}
+
+.notSelect2 {
+    background-image: url("../../assets/img/centerTwoDisabled.png");
+}
+
+.notSelect3 {
+    background-image: url("../../assets/img/centerTwoDisabled.png");
+}
+.notSelect4 {
+    background-image: url("../../assets/img/rightTabDisabled.png");
+}
+.select0 {
+    background-image: url("../../assets/img/leftTab.png");
+}
+
+.select1 {
+    background-image: url("../../assets/img/centerTwoTab.png");
+}
+
+.select2 {
+    background-image: url("../../assets/img/centerTwoTab.png");
+}
+
+.select3 {
+    background-image: url("../../assets/img/centerTwoTab.png");
+}
+
+.select4 {
+    background-image: url("../../assets/img/rightTab.png");
+}

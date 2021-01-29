@@ -1,0 +1,28 @@
+.my-tabbar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 1.78rem;
+}
+
+.tabs {
+    box-sizing: border-box;
+    width: 2.2rem;
+    height: .8rem;
+    background-color: #26298f;
+    border-radius: .4rem;
+    font-size: .24rem;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-shrink: 0;
+    margin: 0 .2rem .1rem;
+}
+
+.select {
+    border: 0.04rem solid #fa78e7;
+    background-color: #5864fa;
+}

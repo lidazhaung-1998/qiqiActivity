@@ -1,0 +1,100 @@
+.list-wrap {
+    margin: 0 auto;
+    box-sizing: border-box;
+    width: 944px;
+    background-color: #f34270;
+    border-radius: 10px;
+    border: 4px solid #d91548;
+
+    .list-title {
+        line-height: 64px;
+        color: #fff;
+        font-weight: bold;
+        font-size: 20px;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .list-content {
+        .list {
+            width: 100%;
+
+            .item:nth-of-type(2n+1) {
+                background-color: #ff81a2;
+            }
+
+            .item {
+                position: relative;
+                height: 51px;
+                color: #fff;
+
+                div {
+                    text-align: center;
+                    line-height: 51px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    position: absolute;
+                }
+
+                .rank {
+                    width: 48px;
+                    height: 34px;
+                    line-height: 34px;
+                    margin-top: 8.5px;
+                    background-size: 100% 100%;
+                    left: 23px;
+                }
+
+                .rank1 {
+                    color: #ff6e04;
+                    line-height: 47px;
+                    background-image: url("../../assets/img/listNo1.png");
+                }
+
+                .rank2 {
+                    color: #6f6f6f;
+                    line-height: 47px;
+                    background-image: url("../../assets/img/listNo2.png");
+                }
+
+                .rank3 {
+                    color: #982a0d;
+                    line-height: 47px;
+                    background-image: url("../../assets/img/listNo3.png");
+                }
+
+                .name {
+                    width: 120px;
+                    left: 105px;
+                }
+
+                .uid {
+                    width: 95px;
+                    left: 223px;
+                }
+
+                .CardiacValue {
+                    width: 100px;
+                    left: 363px;
+                }
+
+                .sweetheart {
+                    width: 120px;
+                    left: 534px;
+                }
+
+                .uuid {
+                    width: 95px;
+                    left: 677px;
+                }
+
+                .sentValue {
+                    width: 70px;
+                    left: 815px;
+                }
+            }
+        }
+    }
+
+}

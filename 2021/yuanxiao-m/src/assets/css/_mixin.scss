@@ -1,0 +1,67 @@
+@mixin themeWrap() {
+    margin: 0 auto;
+    padding-bottom: .5rem;
+    box-sizing: border-box;
+    border-radius: .3rem;
+    border: 0.04rem solid #0e1569;
+    width: 7.19rem;
+    height: auto;
+    background-color: #fff;
+    position: relative;
+}
+
+@mixin themeContent() {
+    margin: .2rem auto .2rem;
+    padding-bottom: .4rem;
+    box-sizing: border-box;
+    width: 6.75rem;
+    height: auto;
+    background-color: #6d78ff;
+    border-radius: .2rem;
+    border: 0.04rem solid #26298f;
+
+}
+
+@mixin pkAnchorBox($bgcolor,$borderColor) {
+    box-sizing: border-box;
+    width: 2.74rem;
+    height: 1.23rem;
+    border-radius: .14rem;
+    border: 0.04rem solid $borderColor;
+    background-color: $bgcolor;
+    position: relative;
+    .winCount {
+        position: absolute;
+        right: -.1rem;
+        bottom: -.2rem;
+        box-sizing: border-box;
+        width: .6rem;
+        height: .6rem;
+        border-radius: 50%;
+        border: 0.03rem solid $borderColor;
+        background-color: $bgcolor;
+        color: #fff;
+        font-size: .42rem;
+        font-weight: bold;
+        text-align: center;
+        line-height: .54rem;
+    }
+}
+
+@mixin switchDateBox() {
+    width: 43px;
+    height: 30px;
+    background-color: #6d78ff;
+    border-radius: 10px;
+    border: 1px solid #0e1569;
+}
+
+@mixin triangle($left) {
+    width: 0;
+    height: 0;
+    border-top:.13rem solid transparent;
+    border-bottom: .13rem solid transparent;
+    position: relative;
+    top: .085rem;
+    left: $left;
+}

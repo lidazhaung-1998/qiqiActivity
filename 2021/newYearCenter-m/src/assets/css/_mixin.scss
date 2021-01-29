@@ -1,0 +1,83 @@
+@mixin boxShadow($bgColor,$borderW,$borderColor,$borderR,$top,$left) {
+    position: relative;
+    &:before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: $bgColor;
+        border: $borderW solid $borderColor;
+        border-radius: $borderR;
+        position: absolute;
+        z-index: -1;
+        top: $top;
+        left: $left;
+    }
+}
+
+@mixin crown($img) {
+    position: relative;
+    &:before {
+        content: "";
+        position: absolute;
+        width: .42rem;
+        height: .38rem;
+        background-image: url($img);
+        background-size: 100% 100%;
+        z-index: -1;
+        top: -.22rem;
+        left: -.09rem;
+    }
+}
+
+@mixin frontThreeicon($img) {
+    &:before {
+        content: "";
+        position: absolute;
+        width: 1.02rem;
+        height: 1.02rem;
+        background-image: url($img);
+        background-size: 100% 100%;
+        bottom: -.15rem;
+        right: -.15rem;
+    }
+}
+
+@mixin triangle($left) {
+    width: 0;
+    height: 0;
+    border-top: 0.08rem solid transparent;
+    border-bottom: 0.08rem solid transparent;
+    position: relative;
+    top: 0.08rem;
+    left: $left;
+}
+
+@mixin angle($color,$borderW) {
+    box-sizing: border-box;
+    border: $borderW solid #000;
+    transform: skewX(-3deg);
+    border-radius: .2rem;
+    background-color: $color;
+}
+
+@mixin themeWrap (){
+    margin: 0 auto;
+    padding-bottom: .4rem;
+    box-sizing: border-box;
+    border-radius: .2rem;
+    border: 1px solid #000;
+    width: 7.09rem;
+    height: auto;
+    background-color: #fff;
+    position: relative;
+}
+@mixin  themeContent (){
+    margin: .2rem auto 0;
+    padding-bottom: .4rem;
+    box-sizing: border-box;
+    width: 6.88rem;
+    height: auto;
+    background-color: #ffc5d4;
+    border-radius: .1rem;
+    border: 1px solid #000;
+}
