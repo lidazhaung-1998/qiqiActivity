@@ -226,6 +226,7 @@
                                 width: 96px;
                                 height: 96px;
                                 border-radius: 50%;
+                                background-color: #fff;
                                 background-image: url("../assets/img/qlz.png");
                                 background-size: 100% 100%;
                                 border: 1px solid #000;
