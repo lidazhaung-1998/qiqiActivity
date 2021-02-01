@@ -33,9 +33,10 @@
 <script>
     import YuanXiaoPK from "./yuanxiaoPK"
     import rich from "./rich";
+
     export default {
         name: "index",
-        components: {YuanXiaoPK,rich},
+        components: {YuanXiaoPK, rich},
         mounted() {
             window.addEventListener("scroll", this.scrollEvent, true);
         },
@@ -49,7 +50,20 @@
                 }
             },
             backTop() {
-                document.documentElement.scrollTop = 0;
+                var currScrollTop = document.documentElement.scrollTop;
+                this.move(document.documentElement, 'scrollTop', currScrollTop, 140, 1000, 'linear');
+            },
+            move(el, prop, startPos, stopPos, duration, type) {
+                var startTime = new Date().getTime();
+                var timer = setInterval(() => {
+                    var t = new Date().getTime();
+                    if (t > startTime + duration) {
+                        clearInterval(timer);
+                        el[prop] = stopPos;
+                    }
+                    var val = this.$Tween.Quad.easeInOut(t - startTime, startPos, stopPos - startPos, duration);
+                    el[prop] = val;
+                }, 16);
             }
         },
         data() {
@@ -171,9 +185,9 @@
         }
     }
 
-    .cloud{
+    .cloud {
         width: 100%;
         height: 209px;
-        background:url("../assets/img/cloud.png") no-repeat center;
+        background: url("../assets/img/cloud.png") no-repeat center;
     }
 </style>

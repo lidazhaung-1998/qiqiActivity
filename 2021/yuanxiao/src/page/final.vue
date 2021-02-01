@@ -28,7 +28,7 @@
         </div>
         <div class="allWinList-wrap">
             <div class="allWinRankTitle"></div>
-            <list more="true" :titles="titles"></list>
+            <list :list="winList" more="true" :titles="titles"></list>
             <paginator @prev="prev" @next="next" :currPage="currPage" :totalPage="totalPage"></paginator>
         </div>
     </div>
@@ -45,12 +45,15 @@
         name: "final",
         props: [],
         components: {contentHead, pagination, pkBox, paginator, list},
+        async created() {
+            await this.getList();
+        },
         data() {
             return {
                 currDay: 1,
                 totalDay: 10,
-                currPage:0,
-                totalPage:4,
+                currPage: 0,
+                totalPage: 0,
                 titles: [
                     "排名",
                     "昵称",
@@ -58,18 +61,29 @@
                     "总胜场数",
                     "总PK积分",
                     "队伍"
-                ]
+                ],
+                winList: []
             }
         },
         methods: {
+            async getList() {
+                let {data} = await this.$api.finalGameRank(this.currPage);
+                if (data.result) {
+                    this.winList = data.result.list;
+                    this.totalPage = data.result.totalPage;
+                }
+            },
             switchDateTab(val) {
                 this.currDay = val;
             },
-            prev() {
+            async prev() {
                 this.currPage--;
+                await this.getList();
+
             },
-            next() {
+            async next() {
                 this.currPage++;
+                await this.getList();
             },
         }
     }

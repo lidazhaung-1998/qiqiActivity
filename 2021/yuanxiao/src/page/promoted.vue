@@ -13,7 +13,7 @@
                 </div>
             </content-head>
 
-            <list :titles="titles"></list>
+            <list :list="list" :titles="titles"></list>
 
         </div>
         <paginator @prev="prev" @next="next" :totalPage="totalPage" :currPage="currPage"></paginator>
@@ -27,26 +27,47 @@
     import paginator from "../components/paginator/paginator";
 
     export default {
-        name: "promoted", components: {list, paginator, contentHead},
+        name: "promoted",
+        components: {list, paginator, contentHead},
+        async created() {
+            await this.getList();
+        },
         data() {
             return {
                 selectIndex: 0,
                 currPage: 0,
-                totalPage: 4,
+                totalPage: 0,
                 titles: [
                     "排名",
                     "昵称",
                     "ID",
                     "连胜场次"
-                ]
+                ],
+                list: [],
+            }
+        },
+        watch: {
+            async selectIndex() {
+                this.currPage = 0;
+                await this.getList();
             }
         },
         methods: {
-            prev() {
-                this.currPage--;
+            async getList() {
+                let url = this.selectIndex === 0 ? "promotedRank" : "finalAnchorRank";
+                let {data} = await this.$api.promotedRank(url, this.currPage);
+                if (data.result) {
+                    this.totalPage = data.result.totalPage;
+                    this.list = data.result.list;
+                }
             },
-            next() {
+            async prev() {
+                this.currPage--;
+                await this.getList();
+            },
+            async next() {
                 this.currPage++;
+                await this.getList();
             },
         }
     }
