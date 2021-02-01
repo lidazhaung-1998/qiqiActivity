@@ -51,7 +51,20 @@
                 }
             },
             backTop() {
-                document.documentElement.scrollTop = 0;
+                var currScrollTop = document.documentElement.scrollTop;
+                this.move(document.documentElement, 'scrollTop', currScrollTop, 100, 1000);
+            },
+            move(el, prop, startPos, stopPos, duration) {
+                var startTime = +new Date;
+                var timer = setInterval(() => {
+                    var t = +new Date;
+                    if (t > startTime + duration) {
+                        clearInterval(timer);
+                        el[prop] = stopPos;
+                    }
+                    var val = this.$Tween.Quad.easeInOut(t - startTime, startPos, stopPos - startPos, duration);
+                    el[prop] = val;
+                }, 19);
             }
         },
         data() {
