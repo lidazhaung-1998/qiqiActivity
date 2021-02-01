@@ -10,7 +10,7 @@
                     <div class="anchorHead" :style="{'backgroundImage':'url('+item.roomPic+')'}"></div>
                     <div class="txtinfo" v-show="!item.none">
                         <div>
-                            <span>昵称：</span>
+                            <span></span>
                             <span>{{item.roomName}}</span>
                         </div>
                         <div>

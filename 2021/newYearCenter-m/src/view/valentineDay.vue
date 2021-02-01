@@ -187,7 +187,7 @@
                 .valentineMedal {
                     margin: 0 auto;
                     width: 6.88rem;
-                    height: 5.35rem;
+                    height: 3.55rem;
                     background-image: url("../assets/img/valentineMedal-m.png");
                     background-size: 100% 100%;
                 }
@@ -213,6 +213,7 @@
                         align-items: center;
 
                         .giftInfo {
+                            flex-shrink: 0;
                             margin-right: .25rem;
                             box-sizing: border-box;
                             width: 100%;
@@ -226,9 +227,10 @@
                             justify-content: space-around;
 
                             .giftimg {
-                                width: 1.07rem;
-                                height: 1.07rem;
+                                width: 1.03rem;
+                                height: 1.03rem;
                                 border-radius: 50%;
+                                background-color: #fff;
                                 background-image: url("../assets/img/qlz.png");
                                 background-size: 100% 100%;
                                 border: 1px solid #000;
