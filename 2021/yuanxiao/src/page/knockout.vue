@@ -25,13 +25,25 @@
 <script>
     import contentHead from "../components/contentHead/contentHead";
     import pkBox from "../components/pkBox/pkBox";
+
     export default {
         name: "knockout",
         props: [],
-        components: {contentHead,pkBox},
+        components: {contentHead, pkBox},
+        created() {
+        },
+        mounted() {
+            this.timer = setInterval(async () => {
+
+            }, 10000);
+        },
+        beforeDestroy() {
+            clearInterval(this.timer);
+        },
         data() {
             return {
-                selectIndex: 0
+                selectIndex: 0,
+                timer: null,
             }
         },
         methods: {}

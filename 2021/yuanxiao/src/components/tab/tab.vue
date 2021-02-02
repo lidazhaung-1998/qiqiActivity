@@ -17,9 +17,7 @@
     export default {
         name: "headers",
         props: ["tabs", "currPage"],
-        created() {
-
-        },
+        created() {},
         computed: {},
         data() {
             return {

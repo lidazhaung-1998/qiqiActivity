@@ -32,6 +32,14 @@
         async created() {
             await this.getList();
         },
+        mounted() {
+            this.timer = setInterval(async () => {
+                await this.getList();
+            }, 10000);
+        },
+        beforeDestroy() {
+            clearInterval(this.timer);
+        },
         data() {
             return {
                 selectIndex: 0,
@@ -44,6 +52,7 @@
                     "连胜场次"
                 ],
                 list: [],
+                timer: null,
             }
         },
         watch: {

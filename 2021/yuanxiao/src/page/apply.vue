@@ -34,16 +34,27 @@
 
 <script>
     import paginator from "../components/paginator/paginator";
+
     export default {
         name: "apply",
-        components:{paginator},
+        components: {paginator},
+        created() {
+        },
+        mounted() {
+            this.timer = setInterval(async () => {
+
+            }, 10000);
+        },
+        beforeDestroy() {
+            clearInterval(this.timer);
+        },
         data() {
             return {
                 selectIndex: 0,
                 currPage: 0,
-                totalPage: 4
+                totalPage: 4,
+                timer: null,
             }
-
         },
         computed: {},
         methods: {
@@ -194,7 +205,6 @@
                 }
             }
         }
-
 
 
     }

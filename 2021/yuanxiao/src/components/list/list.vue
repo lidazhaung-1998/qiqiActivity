@@ -8,13 +8,13 @@
                 <ul class="list">
                     <li class="item" v-for="(item,index) in list">
                         <div class="rank">
-                            <div class="rankimg" :class="item.rankNo < 4 ? 'rankimg'+(index+1) : '' ">{{index+1}}</div>
+                            <div class="rankimg" :class="item.rankNo < 4 || item.rank ? 'rankimg'+(index+1) : '' ">{{item.rankNo || item.rank}}</div>
                         </div>
                         <div class="name">
-                            <span>{{item.anchorName}}</span>
+                            <span>{{item.anchorName || item.userNickName}}</span>
                         </div>
                         <div class="uid">
-                            <span>{{item.anchorId}}</span>
+                            <span>{{item.anchorId || item.userId}}</span>
                         </div>
                         <div class="CardiacValue">
                             <span>{{item.scores}}</span>
@@ -25,8 +25,9 @@
                         <div class="teamScore" v-show="more">
                             <span>546</span>
                         </div>
+<!--                        这个是用户预计分红齐齐豆-->
                         <div class="divide" v-show="divide">
-                            <span>546</span>
+                            <span>{{item.award}}</span>
                         </div>
                     </li>
                 </ul>

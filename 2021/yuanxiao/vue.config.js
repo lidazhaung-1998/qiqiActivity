@@ -929,6 +929,140 @@ module.exports = {
                     })
                 }
             });
+            app.get('/data/userRank', function (req, res) {
+                let type = req.query.type;
+                if (type == 0) {
+                    res.send({
+                        "errcode": 0,
+                        "result": {
+                            "list": [
+                                {
+                                    "award": 0,
+                                    "rank": 1,
+                                    "scores": 100,
+                                    "timeStamp": 1593415844143,
+                                    "userId": 153494569,
+                                    "userNickName": "汤圆",
+                                    "userPic": ""
+                                },
+                                {
+                                    "award": 0,
+                                    "rank": 2,
+                                    "scores": 100,
+                                    "timeStamp": 1593415844143,
+                                    "userId": 153494569,
+                                    "userNickName": "汤圆",
+                                    "userPic": ""
+                                },
+                                {
+                                    "award": 0,
+                                    "rank": 3,
+                                    "scores": 100,
+                                    "timeStamp": 1593415844143,
+                                    "userId": 153494569,
+                                    "userNickName": "汤圆",
+                                    "userPic": ""
+                                },
+                                {
+                                    "award": 0,
+                                    "rank": 4,
+                                    "scores": 100,
+                                    "timeStamp": 1593415844143,
+                                    "userId": 153494569,
+                                    "userNickName": "汤圆",
+                                    "userPic": ""
+                                },
+                                {
+                                    "award": 0,
+                                    "rank": 5,
+                                    "scores": 100,
+                                    "timeStamp": 1593415844143,
+                                    "userId": 153494569,
+                                    "userNickName": "汤圆",
+                                    "userPic": ""
+                                },
+                            ],
+                            "totalPage": 1
+                        },
+                        "errmsg": "",
+                        "status": 200
+                    })
+                } else {
+                    res.send({
+                        "errcode": 0,
+                        "result": {
+                            "list": [
+                                {
+                                    "award": 0,
+                                    "rank": 1,
+                                    "scores": 100,
+                                    "timeStamp": 1593415844143,
+                                    "userId": 153494569,
+                                    "userNickName": "饺子",
+                                    "userPic": ""
+                                },
+                                {
+                                    "award": 0,
+                                    "rank": 2,
+                                    "scores": 100,
+                                    "timeStamp": 1593415844143,
+                                    "userId": 153494569,
+                                    "userNickName": "饺子",
+                                    "userPic": ""
+                                },
+                                {
+                                    "award": 0,
+                                    "rank": 3,
+                                    "scores": 100,
+                                    "timeStamp": 1593415844143,
+                                    "userId": 153494569,
+                                    "userNickName": "饺子",
+                                    "userPic": ""
+                                },
+                                {
+                                    "award": 0,
+                                    "rank": 4,
+                                    "scores": 100,
+                                    "timeStamp": 1593415844143,
+                                    "userId": 153494569,
+                                    "userNickName": "饺子",
+                                    "userPic": ""
+                                },
+                                {
+                                    "award": 0,
+                                    "rank": 5,
+                                    "scores": 100,
+                                    "timeStamp": 1593415844143,
+                                    "userId": 153494569,
+                                    "userNickName": "饺子",
+                                    "userPic": ""
+                                },
+                            ],
+                            "totalPage": 1
+                        },
+                        "errmsg": "",
+                        "status": 200
+                    })
+                }
+            });
+            app.get('/data/awardPool', function (req, res) {
+                let type = req.query.type;
+                if (type == 0) {
+                    res.send( {
+                        "errcode": 0,
+                        "result": "汤圆",
+                        "errmsg": "",
+                        "status": 200
+                    })
+                } else {
+                    res.send( {
+                        "errcode": 0,
+                        "result": "饺子",
+                        "errmsg": "",
+                        "status": 200
+                    })
+                }
+            });
         }
     }
 }

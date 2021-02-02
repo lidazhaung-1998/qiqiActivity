@@ -3,16 +3,21 @@ import axios from "./http";
 const base = {
     // newYear: "//hot-active.qxiu.com/festival_common/newyearCRank2021/",
     // http://192.168.25.130:8080
-    yuanxiao: "/data/"
+    yuanxiao: "/data/yuanXiaoStage0",
+    // yuanxiao: "http://hot.active.qxiu.com/festival_common/yuanXiaoStage01",
+    // rich: "http://hot.active.qxiu.com/festival_common/yuandanall/",
+    rich: "/data/"
     // https://hot-active.qxiu.com
 };
 const api = {
-    promotedRank(url, page) {
-        return axios.get(base.yuanxiao + url, {
+    // step 是yuanXiaoStage0 （1|2|3|4）
+    promotedRank(step, type, page) {
+        return axios.get(base.yuanxiao + step + "/ancwinstreakrank", {
             params: {
+                type: type,
                 page: page
             }
-        })
+        });
     },
     finalGameRank(page) {
         return axios.get(base.yuanxiao + 'finalAnchorRank', {
@@ -21,10 +26,19 @@ const api = {
             }
         });
     },
-    richRank(url, page) {
-        return axios.get(base.yuanxiao + url, {
+
+
+    richDivide(type, page) {
+        return axios.get(base.rich + "awardPool", {
             params: {
-                page: page
+                type: type
+            }
+        })
+    },
+    richRank(page) {
+        return axios.get(base.rich + "userRank", {
+            params: {
+                type: page
             }
         })
     }
