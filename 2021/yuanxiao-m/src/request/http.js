@@ -10,6 +10,9 @@ var instance = axios.create({timeout: 1000 * 10});
 instance.interceptors.request.use(
     config => {
         for (var key in config.params) {
+            if(!query[key]){
+                continue;
+            }
             config.params[key] = query[key];
         }
         return config;

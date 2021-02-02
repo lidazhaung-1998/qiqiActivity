@@ -6,18 +6,18 @@
             </div>
             <div class="list-content">
                 <ul class="list">
-                    <li class="item" v-for="(item,index) in new Array(10)">
+                    <li class="item" v-for="(item,index) in list">
                         <div class="rank">
                             <div class="rankimg" :class="(index+1) < 4 ? 'rankimg'+(index+1) : '' ">{{index+1}}</div>
                         </div>
                         <div class="name">
-                            <span>炫酷达人</span>
+                            <span>{{item.anchorName}}</span>
                         </div>
                         <div class="uid">
-                            <span>123456</span>
+                            <span>{{item.anchorId}}</span>
                         </div>
                         <div class="CardiacValue">
-                            <span>546</span>
+                            <span>{{item.scores}}</span>
                         </div>
                         <div class="allPKscore" v-show="more">
                             <span>123456</span>

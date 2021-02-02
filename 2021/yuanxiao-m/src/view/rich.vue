@@ -19,7 +19,7 @@
             </div>
         </contentHead>
         <div class="teamListTitle" :class="'teamListTitle'+selectIndex"></div>
-        <list :titles="titles" :divide="true"></list>
+        <list :list="list" :titles="titles" :divide="true"></list>
         <paginator @prev="prev" @next="next" :currPage="currPage" :totalPage="totalPage"></paginator>
     </div>
 </template>
@@ -32,6 +32,17 @@
     export default {
         name: "rich",
         components: {contentHead, list, paginator},
+        async created() {
+            await this.getList();
+        },
+        mounted() {
+            this.timer = setInterval(async () => {
+                await this.getList();
+            }, 10000);
+        },
+        beforeDestroy() {
+            clearInterval(this.timer);
+        },
         data() {
             return {
                 selectIndex: 0,
@@ -43,15 +54,33 @@
                     "ID",
                     "神豪值",
                     "预计可获得奖池比例"
-                ]
+                ],
+                list: [],
+                timer: null,
+            }
+        },
+        watch: {
+            async selectIndex() {
+                this.currPage = 0;
+                await this.getList();
             }
         },
         methods: {
-            prev() {
-                this.currPage--;
+            async getList() {
+                let url = this.selectIndex === 0 ? "promotedRank" : "finalAnchorRank";
+                let {data} = await this.$api.richRank(url, this.currPage)
+                if (data.result) {
+                    this.totalPage = data.result.totalPage;
+                    this.list = data.result.list;
+                }
             },
-            next() {
+            async prev() {
+                this.currPage--;
+                await this.getList();
+            },
+            async next() {
                 this.currPage++;
+                await this.getList();
             }
         }
     }
