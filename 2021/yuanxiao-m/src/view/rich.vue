@@ -7,7 +7,7 @@
             </div>
             <div class="jackpotTitle" slot="jackpotTitle" :class="'jackpotTitle'+selectIndex"></div>
             <div class="jackpotDetail" slot="jackpotDetail">
-                <div class="detail">123456</div>
+                <div class="detail">{{details}}</div>
                 豆
             </div>
             <div class="ruleTitle" slot="ruleTitle">
@@ -34,10 +34,12 @@
         components: {contentHead, list, paginator},
         async created() {
             await this.getList();
+            await this.getAward();
         },
         mounted() {
             this.timer = setInterval(async () => {
                 await this.getList();
+                await this.getAward();
             }, 10000);
         },
         beforeDestroy() {
@@ -56,6 +58,7 @@
                     "预计可获得奖池比例"
                 ],
                 list: [],
+                details:0,
                 timer: null,
             }
         },
@@ -63,16 +66,30 @@
             async selectIndex() {
                 this.currPage = 0;
                 await this.getList();
+                await this.getAward();
+            }
+        },
+        computed: {
+            sentType() {
+                if (this.selectIndex === 0) {
+                    return 1;
+                } else {
+                    return 0;
+                }
             }
         },
         methods: {
             async getList() {
                 let url = this.selectIndex === 0 ? "promotedRank" : "finalAnchorRank";
-                let {data} = await this.$api.richRank(url, this.currPage)
+                let {data} = await this.$api.richRank(this.sentType, this.currPage)
                 if (data.result) {
                     this.totalPage = data.result.totalPage;
                     this.list = data.result.list;
                 }
+            },
+            async getAward() {
+                let {data} = await this.$api.richDivide(this.sentType);
+                this.details = data.result;
             },
             async prev() {
                 this.currPage--;

@@ -39,6 +39,12 @@
         name: "index",
         components: {YuanXiaoPK, rich},
         mounted() {
+            fetch("/data/finalAnchorRank?page=0", {
+                // method:"GET",
+                headers: {
+                    'content-type': 'application/json'
+                },
+            })
             window.addEventListener("scroll", this.scrollEvent, true);
         },
         methods: {
