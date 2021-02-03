@@ -8,7 +8,9 @@
                 <ul class="list">
                     <li class="item" v-for="(item,index) in list">
                         <div class="rank">
-                            <div class="rankimg" :class="item.rankNo < 4 || item.rank ? 'rankimg'+(index+1) : '' ">{{item.rankNo || item.rank}}</div>
+                            <div class="rankimg" :class="item.rankNo < 4 || item.rank ? 'rankimg'+(index+1) : '' ">
+                                {{item.rankNo || item.rank}}
+                            </div>
                         </div>
                         <div class="name">
                             <span>{{item.anchorName || item.userNickName}}</span>
@@ -25,7 +27,7 @@
                         <div class="teamScore" v-show="more">
                             <span>546</span>
                         </div>
-<!--                        这个是用户预计分红齐齐豆-->
+                        <!--                        这个是用户预计分红齐齐豆-->
                         <div class="divide" v-show="divide">
                             <span>{{item.award}}</span>
                         </div>
@@ -56,6 +58,7 @@
         background-color: #424ee3;
         border-radius: 20px;
         border: 4px solid #0e1569;
+        overflow: hidden;
 
         .list-title {
             line-height: 64px;

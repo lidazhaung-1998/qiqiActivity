@@ -55,6 +55,15 @@
                 timer: null,
             }
         },
+        computed: {
+            sentType() {
+                if (this.selectIndex === 0) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        },
         watch: {
             async selectIndex() {
                 this.currPage = 0;
@@ -63,8 +72,7 @@
         },
         methods: {
             async getList() {
-                let url = this.selectIndex === 0 ? "promotedRank" : "finalAnchorRank";
-                let {data} = await this.$api.promotedRank(url, this.currPage);
+                let {data} = await this.$api.promotedRank('2', this.sentType, this.currPage);
                 if (data.result) {
                     this.totalPage = data.result.totalPage;
                     this.list = data.result.list;

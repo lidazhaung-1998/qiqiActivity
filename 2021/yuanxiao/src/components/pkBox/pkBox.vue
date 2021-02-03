@@ -1,30 +1,35 @@
 <template>
+
     <div class="twentyPKContent">
-        <div class="pk-box" v-for="item in new Array(10)">
-            <slot name="pkDate"></slot>
+        <div class="pk-box" v-for="item in pkList">
+            <div slot="pkDate" class="gameDate" v-show="gameTiem">{{item.startTime}}</div>
             <div class="pkDetails-wrap">
-                <div class="leftAnchor" :class="win">
+                <div class="leftAnchor" :class="item.win === 1 ? win : '' ">
                     <div class="anchorInfo ">
-                        <div class="anchorHead"></div>
+                        <div class="anchorHead">
+                            <img :src="item.anchorPic1 || defaultHead" alt="">
+                        </div>
                         <div class="anchorname">
-                            <div class="id">ID:12456789</div>
-                            <div class="name">齐齐大牛人</div>
-                            <div>饺子队</div>
+                            <div class="id">ID:{{item.anchorId1}}</div>
+                            <div class="name">{{item.anchorName1 || "炫酷达人"}}</div>
+                            <div>{{team}}</div>
                         </div>
                     </div>
-                    <div class="winCount">1</div>
+                    <div class="winCount">{{item.score1}}</div>
                 </div>
                 <div class="center"></div>
-                <div class="rightAnchor" :class="win">
+                <div class="rightAnchor" :class="item.win === 2 ? win : '' ">
                     <div class="anchorInfo ">
-                        <div class="anchorHead"></div>
+                        <div class="anchorHead">
+                            <img :src="item.anchorPic2 || defaultHead" alt="">
+                        </div>
                         <div class="anchorname">
-                            <div class="id">ID:12456789</div>
-                            <div class="name">齐齐大牛人</div>
-                            <div>饺子队</div>
+                            <div class="id">ID:{{item.anchorId2}}</div>
+                            <div class="name">{{item.anchorName2 || "炫酷达人"}}</div>
+                            <div>{{team}}</div>
                         </div>
                     </div>
-                    <div class="winCount">1</div>
+                    <div class="winCount">{{item.score2}}</div>
                 </div>
             </div>
         </div>
@@ -34,10 +39,18 @@
 <script>
     export default {
         name: "pkBox",
-        props: ["win"],
+        props: ["win", "pkList", "gameTiem", "theTeam"],
         components: {},
         data() {
-            return {}
+            return {
+                defaultHead: "http://static.qxiu.com/live/img/static/default818.png"
+            }
+        },
+        computed: {
+            team() {
+                return this.theTeam ? "汤圆队" : "饺子队";
+            },
+
         },
         methods: {}
     }
@@ -147,6 +160,11 @@
                         border-radius: 50%;
                         box-sizing: border-box;
                         border: 4px solid #fff;
+                        overflow: hidden;
+
+                        img {
+                            width: 100%;
+                        }
                     }
 
                     .anchorname {

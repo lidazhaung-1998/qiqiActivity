@@ -4,8 +4,8 @@
             <div class="actGiftMsg"></div>
             <div class="choseTeam"></div>
             <div class="showMyTeam">
-                <div class="team yuanxiao"></div>
-                <div class="team jiaozi"></div>
+                <div v-if="!theTeam" class="team yuanxiao"></div>
+                <div v-else class="team jiaozi"></div>
             </div>
         </div>
         <div class="guild-wrap">
@@ -15,14 +15,14 @@
             </div>
 
             <div class="teamAnchorList-wrap">
-                <div class="anchorInfo-box" v-for="item in new Array(6)">
+                <div class="anchorInfo-box" v-for="item in anchorsList">
                     <div class="anchorInfo">
                         <div class="anchorHead"></div>
                         <div class="ellipsis anchorId">
-                            ID:2334315
+                            ID:{{item.anchorId}}
                         </div>
                         <div class="ellipsis anchorName">
-                            昵称:七七大牛人
+                            昵称:{{item.anchorName}}
                         </div>
                     </div>
                 </div>
@@ -38,11 +38,13 @@
     export default {
         name: "apply",
         components: {paginator},
-        created() {
+        async created() {
+            await this.checkAnchorIden();
+            await this.getAnchors();
         },
         mounted() {
             this.timer = setInterval(async () => {
-
+                await this.getAnchors();
             }, 10000);
         },
         beforeDestroy() {
@@ -52,17 +54,46 @@
             return {
                 selectIndex: 0,
                 currPage: 0,
-                totalPage: 4,
+                totalPage: 0,
+                theTeam: 0,
+                anchorsList: [],
                 timer: null,
             }
         },
-        computed: {},
+        watch: {
+            async selectIndex() {
+                this.currPage = 0;
+                await this.getAnchors();
+            }
+        },
+        computed: {
+            sentType() {
+                if (this.selectIndex === 0) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        },
         methods: {
-            prev() {
-                this.currPage--;
+            async checkAnchorIden() {
+                let {data} = await this.$api.anchorIden('1');
+                this.theTeam = data.result;
             },
-            next() {
+            async getAnchors() {
+                let {data} = await this.$api.anchors('1', this.sentType, this.currPage);
+                if (data.result) {
+                    this.anchorsList = data.result.list;
+                    this.totalPage = data.result.totalPage;
+                }
+            },
+            async prev() {
+                this.currPage--;
+                await this.getAnchors();
+            },
+            async next() {
                 this.currPage++;
+                await this.getAnchors();
             },
             async changeList(val) {
                 this.selectIndex = val;

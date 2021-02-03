@@ -15,9 +15,7 @@
         </div>
         <div class="twentyPK-wrap">
             <div class="twentyPK-title"></div>
-            <pkBox win="win">
-                <div slot="pkDate" class="gameDate">比赛时间02.24 19：00</div>
-            </pkBox>
+            <pkBox :pkList="pkList" win="win" :theTeam="selectIndex" gameTiem="true"></pkBox>
         </div>
     </div>
 </template>
@@ -30,11 +28,12 @@
         name: "knockout",
         props: [],
         components: {contentHead, pkBox},
-        created() {
+        async created() {
+            await this.getpkList();
         },
         mounted() {
             this.timer = setInterval(async () => {
-
+                await this.getpkList();
             }, 10000);
         },
         beforeDestroy() {
@@ -43,10 +42,30 @@
         data() {
             return {
                 selectIndex: 0,
+                pkList: [],
                 timer: null,
             }
         },
-        methods: {}
+        watch: {
+            async selectIndex() {
+                await this.getpkList();
+            }
+        },
+        computed: {
+            sentType() {
+                if (this.selectIndex === 0) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        },
+        methods: {
+            async getpkList() {
+                let {data} = await this.$api.knockoutPKList('3', this.sentType);
+                this.pkList = data.result;
+            }
+        }
     }
 </script>
 

@@ -24,7 +24,7 @@
         </div>
         <div class="turns-wrap">
             <pagination @change="switchDateTab" :currDay="currDay" :total="totalDay"></pagination>
-            <pkBox win="win2"></pkBox>
+            <pkBox :pkList="pkList" win="win2"></pkBox>
         </div>
         <div class="allWinList-wrap">
             <div class="allWinRankTitle"></div>
@@ -46,10 +46,12 @@
         props: [],
         components: {contentHead, pagination, pkBox, paginator, list},
         async created() {
+            await this.getFinalPKList();
             await this.getList();
         },
         mounted() {
             this.timer = setInterval(async () => {
+                await this.getFinalPKList();
                 await this.getList();
             }, 10000);
         },
@@ -71,19 +73,25 @@
                     "队伍"
                 ],
                 list: [],
+                pkList: [],
                 timer: null,
             }
         },
         methods: {
+            async getFinalPKList() {
+                let {data} = await this.$api.finalPKList('4', (this.currDay - 1));
+                this.pkList = data.result;
+            },
             async getList() {
-                let {data} = await this.$api.finalGameRank(this.currPage);
+                let {data} = await this.$api.finalGameRank('4', this.currPage);
                 if (data.result) {
-                    this.list = data.result.list;
-                    this.totalPage = data.result.totalPage;
+                    this.list = data.result;
+                    // this.totalPage = data.result.totalPage;
                 }
             },
-            switchDateTab(val) {
+            async switchDateTab(val) {
                 this.currDay = val;
+                await this.getFinalPKList();
             },
             async prev() {
                 this.currPage--;
