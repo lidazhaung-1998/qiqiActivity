@@ -5,7 +5,8 @@
             <div class="pkDetails-wrap">
                 <div class="pkAnchor leftAnchor" :class="item.win === 1 ? win : '' ">
                     <div class="anchorInfo">
-                        <div class="anchorHead" :class="item.state1 === 2 ? 'live' : '' " @click="toRoom(item.state1,item.roomId1)">
+                        <div class="anchorHead" :class="item.state1 === 2 ? 'live' : '' "
+                             @click="toRoom(item.state1,item.roomId1)">
                             <img :src="item.anchorPic1 || defaultHead" alt="">
                         </div>
                         <div class="anchorname">
@@ -19,7 +20,8 @@
                 <div class="center"></div>
                 <div class="pkAnchor rightAnchor" :class="item.win === 2 ? win : '' ">
                     <div class="anchorInfo">
-                        <div class="anchorHead" :class="item.state2 === 2 ? 'live' : '' " @click="toRoom(item.state2,item.roomId2)">
+                        <div class="anchorHead" :class="item.state2 === 2 ? 'live' : '' "
+                             @click="toRoom(item.state2,item.roomId2)">
                             <img :src="item.anchorPic2 || defaultHead" alt="">
                         </div>
                         <div class="anchorname">
