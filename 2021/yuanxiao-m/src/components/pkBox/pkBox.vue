@@ -4,8 +4,8 @@
             <div v-show="gameTime" class="gameDate">{{item.startTime}}</div>
             <div class="pkDetails-wrap">
                 <div class="pkAnchor leftAnchor" :class="item.win === 1 ? win : '' ">
-                    <div class="anchorInfo ">
-                        <div class="anchorHead">
+                    <div class="anchorInfo">
+                        <div class="anchorHead" :class="item.state1 === 2 ? 'live' : '' " @click="toRoom(item.state1,item.roomId1)">
                             <img :src="item.anchorPic1 || defaultHead" alt="">
                         </div>
                         <div class="anchorname">
@@ -18,8 +18,8 @@
                 </div>
                 <div class="center"></div>
                 <div class="pkAnchor rightAnchor" :class="item.win === 2 ? win : '' ">
-                    <div class="anchorInfo ">
-                        <div class="anchorHead">
+                    <div class="anchorInfo">
+                        <div class="anchorHead" :class="item.state2 === 2 ? 'live' : '' " @click="toRoom(item.state2,item.roomId2)">
                             <img :src="item.anchorPic2 || defaultHead" alt="">
                         </div>
                         <div class="anchorname">
@@ -50,7 +50,17 @@
                 return this.theTeam ? "汤圆队" : "饺子队";
             },
         },
-        methods: {}
+        methods: {
+            toRoom(state, roomid) {
+                if (state === 2 && roomid) {
+                    if (this.common.clientType == 'Android') {
+                        window.location = 'guagua://qiqi::1::1:' + roomid;
+                    } else if (this.common.clientType == 'iPhone') {
+                        window.location = '#guagua://qiqi::1::1:' + roomid;
+                    }
+                }
+            }
+        }
     }
 </script>
 
