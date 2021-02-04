@@ -75,6 +75,7 @@
                 color: #fff;
                 line-height: 60px;
                 text-align: center;
+                cursor: pointer;
             }
 
             .active {

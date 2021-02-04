@@ -38,6 +38,7 @@
         name: "index",
         components: {YuanXiaoPK, rich},
         mounted() {
+            
             window.addEventListener("scroll", this.scrollEvent, true);
         },
         methods: {

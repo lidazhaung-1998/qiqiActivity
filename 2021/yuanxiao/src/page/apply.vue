@@ -17,7 +17,10 @@
             <div class="teamAnchorList-wrap">
                 <div class="anchorInfo-box" v-for="item in anchorsList">
                     <div class="anchorInfo">
-                        <div class="anchorHead"></div>
+                        <div class="anchorHead" :class="item.state==2?'live':''"
+                             @click="toRoom(item.state,item.roomId)">
+                            <img :src="item.ancPic || defaultHead" alt="">
+                        </div>
                         <div class="ellipsis anchorId">
                             ID:{{item.anchorId}}
                         </div>
@@ -52,6 +55,7 @@
         },
         data() {
             return {
+                defaultHead: "http://static.qxiu.com/live/img/static/default818.png",
                 selectIndex: 0,
                 currPage: 0,
                 totalPage: 0,
@@ -97,6 +101,11 @@
             },
             async changeList(val) {
                 this.selectIndex = val;
+            },
+            toRoom(state, roomid) {
+                if (state == 2 && roomid) {
+                    window.location.href = "tvshow:roomid=" + roomid;
+                }
             },
         }
     }
@@ -222,8 +231,27 @@
                             box-sizing: border-box;
                             border-radius: 50%;
                             border: 5px solid #ffffff;
-                            background-image: url("../assets/img/110bdea11b08502aa63744b427a88c24_1.jpg");
                             background-size: 100% 100%;
+                            overflow: hidden;
+                            position: relative;
+
+                            img {
+                                width: 100%;
+                            }
+                        }
+
+                        .live {
+                            cursor: pointer;
+                        }
+
+                        .live:before {
+                            content: "";
+                            position: absolute;
+                            right: 7px;
+                            bottom: 9px;
+                            width: 17px;
+                            height: 17px;
+                            background-image: url("../assets/img/live.gif");
                         }
 
                         .anchorId {

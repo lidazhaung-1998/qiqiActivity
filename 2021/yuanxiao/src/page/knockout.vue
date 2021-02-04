@@ -64,7 +64,8 @@
             async getpkList() {
                 let {data} = await this.$api.knockoutPKList('3', this.sentType);
                 this.pkList = data.result;
-            }
+            },
+
         }
     }
 </script>

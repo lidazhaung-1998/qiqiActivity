@@ -1,12 +1,13 @@
 <template>
-
     <div class="twentyPKContent">
         <div class="pk-box" v-for="item in pkList">
-            <div slot="pkDate" class="gameDate" v-show="gameTiem">{{item.startTime}}</div>
+            <div class="gameDate" v-show="gameTiem">{{item.startTime}}</div>
             <div class="pkDetails-wrap">
                 <div class="leftAnchor" :class="item.win === 1 ? win : '' ">
                     <div class="anchorInfo ">
-                        <div class="anchorHead">
+                        <div class="anchorHead"
+                             :class="item.state1 == 2 ? 'live' : '' "
+                             @click="toRoom(item.state1,item.roomId2)">
                             <img :src="item.anchorPic1 || defaultHead" alt="">
                         </div>
                         <div class="anchorname">
@@ -20,7 +21,9 @@
                 <div class="center"></div>
                 <div class="rightAnchor" :class="item.win === 2 ? win : '' ">
                     <div class="anchorInfo ">
-                        <div class="anchorHead">
+                        <div class="anchorHead"
+                             :class="item.state2 == 2 ? 'live' : '' "
+                             @click="toRoom(item.state2,item.roomId2)">
                             <img :src="item.anchorPic2 || defaultHead" alt="">
                         </div>
                         <div class="anchorname">
@@ -52,7 +55,13 @@
             },
 
         },
-        methods: {}
+        methods: {
+            toRoom(state, roomid) {
+                if (state == 2 && roomid) {
+                    window.location.href = "tvshow:roomid=" + roomid;
+                }
+            },
+        }
     }
 </script>
 
@@ -161,10 +170,25 @@
                         box-sizing: border-box;
                         border: 4px solid #fff;
                         overflow: hidden;
+                        position: relative;
 
                         img {
                             width: 100%;
                         }
+                    }
+
+                    .live {
+                        cursor: pointer;
+                    }
+
+                    .live:before {
+                        content: "";
+                        position: absolute;
+                        right: 7px;
+                        bottom: 9px;
+                        width: 17px;
+                        height: 17px;
+                        background-image: url("../../assets/img/live.gif");
                     }
 
                     .anchorname {
