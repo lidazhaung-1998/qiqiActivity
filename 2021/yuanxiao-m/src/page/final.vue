@@ -10,11 +10,15 @@
                     <div slot="awardtitle" class="awardtitle"></div>
                     <div class="gift-box" slot="slotAward">
                         <div class="gift-content">
-                            <div class="giftImg"></div>
+                            <div class="giftImg">
+<!--                                <img src="http://down.qxiu.com/pic/9448_7.png" alt="">-->
+                            </div>
                             <div class="giftMsg">专属勋章</div>
                         </div>
                         <div class="gift-content">
-                            <div class="giftImg"></div>
+                            <div class="giftImg">
+                                <img src="http://down.qxiu.com/pic/9448_7.png" alt="">
+                            </div>
                             <div class="giftMsg">iPhone12一台</div>
                         </div>
                     </div>
@@ -68,7 +72,7 @@
                     "昵称",
                     "ID",
                     "总胜场数",
-                    "总PK积分",
+                    "PK总票数",
                     "队伍"
                 ],
                 list: [],

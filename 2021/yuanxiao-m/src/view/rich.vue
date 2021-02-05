@@ -11,11 +11,9 @@
                 豆
             </div>
             <div class="ruleTitle" slot="ruleTitle">
-                <div class="leftCircle"></div>
                 <div class="txt">
-                    活动期间，各队主播收到的活动专属礼物价值的20%<br/>将记入奖池PK决赛冠军主播队伍排名前50的用户，将按贡献比例瓜分对方队伍的奖池，还能获得专属勋章
+                    报名资格赛结束后，主播收到的两款活动专属礼物总价值的20%，将记入所属队伍奖池，在PK决赛后，获胜总冠军主播所属队伍排名前50的用户，将按贡献比例瓜分本方以及对方队伍的奖池，并获得专属勋章
                 </div>
-                <div class="rightCircle"></div>
             </div>
         </contentHead>
         <div class="teamListTitle" :class="'teamListTitle'+selectIndex"></div>
@@ -54,8 +52,8 @@
                     "排名",
                     "昵称",
                     "ID",
-                    "神豪值",
-                    "预计可获得奖池比例"
+                    "贡献饺子数",
+                    "预计可获得奖池豆数"
                 ],
                 list: [],
                 details:0,
@@ -63,7 +61,12 @@
             }
         },
         watch: {
-            async selectIndex() {
+            async selectIndex(val) {
+                if(val === 0){
+                    this.$set(this.titles,3,"贡献饺子数");
+                } else{
+                    this.$set(this.titles,3,"贡献汤圆数");
+                }
                 this.currPage = 0;
                 await this.getList();
                 await this.getAward();
@@ -113,8 +116,8 @@
 
         .teamListTitle {
             margin: 20px auto 20px;
-            width: 248px;
-            height: 37px;
+            width: 2.48rem;
+            height: .37rem;
             background-size: 100% 100%;
         }
 

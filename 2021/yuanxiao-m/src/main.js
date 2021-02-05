@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+// import vconsole from "./assets/javascript/vconsole.min"
 import common from "./assets/javascript/common"
 import Tween from "./assets/javascript/tween";
 import api from "./request/api";
@@ -10,3 +11,4 @@ Vue.prototype.$api = api;
 new Vue({
     render: h => h(App)
 }).$mount('#app')
+// new vconsole();

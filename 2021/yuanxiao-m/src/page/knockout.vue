@@ -7,15 +7,15 @@
                     <div class="tab" :class="selectIndex===1?'active':''" @click="selectIndex=1">汤圆队</div>
                 </div>
                 <div class="ruleTitle" slot="ruleTitle">
-                    <div class="txt">队内二十强主播两两随机分配进行PK，3局2胜决出晋级名额<br/>
-                        获胜的主播均可获得 礼物1个
+                    <div class="txt">队内二十强主播两两随机分配进行PK，3局2胜决出晋级名额
+                        获胜的主播均可获得<img src="http://down.qxiu.com/pic/9259_7.png" alt="豪华游艇" title="豪华游艇">礼物1个
                     </div>
                 </div>
             </content-head>
         </div>
         <div class="twentyPK-wrap">
             <div class="twentyPK-title"></div>
-            <pkBox :pkList="pkList" win="win" :theTeam="selectIndex" gameTime="true"></pkBox>
+            <pkBox :pkList="pkList" win="win" gameTime="true"></pkBox>
         </div>
     </div>
 </template>

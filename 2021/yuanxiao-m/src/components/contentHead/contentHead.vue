@@ -20,11 +20,16 @@
                 </div>
                 <div class="gift-box" v-else>
                     <div class="gift-content">
-                        <div class="giftImg"></div>
+                        <div class="giftImg">
+
+                            <img src="http://down.qxiu.com/pic/9426_7.png" alt="">
+                        </div>
                         <div class="giftMsg">饺子队100豆专属礼物</div>
                     </div>
                     <div class="gift-content">
-                        <div class="giftImg"></div>
+                        <div class="giftImg">
+                            <img src="http://down.qxiu.com/pic/9448_7.png" alt="">
+                        </div>
                         <div class="giftMsg">汤圆队100豆专属礼物</div>
                     </div>
                 </div>
@@ -33,8 +38,8 @@
                         <div>注：饺子或汤圆礼物，哪款送得多用户就属于哪支队伍</div>
                     </div>
                     <div v-else>
-                        <div>在PK中收到本队专属礼物，正常增加PK积分</div>
-                        <div>收到非本队的专属礼物，则减少相应礼物<span class="imporant">价值一半</span>的积分</div>
+                        <div>主播在PK中每收到1个本队专属礼物，增加100PK票数</div>
+                        <div>每收到1个非本队的专属礼物，则减少50PK票数</div>
                     </div>
                 </div>
             </div>
@@ -45,7 +50,7 @@
 <script>
     export default {
         name: "contentHead",
-        props: ["jackpotRule","isapply"],
+        props: ["jackpotRule", "isapply"],
         components: {},
         data() {
             return {}
@@ -68,7 +73,7 @@
                 width: 3.14rem;
                 height: 1.16rem;
                 background-color: #26298f;
-                border-radius:.3rem;
+                border-radius: .3rem;
                 border: 0.04rem solid #26298f;
                 box-sizing: border-box;
                 font-size: .24rem;
@@ -101,6 +106,11 @@
                     text-align: center;
                     font-weight: 550;
                     line-height: 1.6;
+
+                    img {
+                        position: relative;
+                        top: 4px;
+                    }
                 }
 
                 .leftCircle {
@@ -109,7 +119,8 @@
                     border-radius: 50%;
                     background-color: #26298f;
                     position: relative;
-flex-shrink: 0;
+                    flex-shrink: 0;
+
                     &:before {
                         content: "";
                         position: absolute;
@@ -130,6 +141,7 @@ flex-shrink: 0;
                     background-color: #26298f;
                     position: relative;
                     flex-shrink: 0;
+
                     &:before {
                         content: "";
                         position: absolute;
@@ -212,6 +224,7 @@ flex-shrink: 0;
                             box-shadow: 0 0.05rem 0 0 #26298f;
                             position: relative;
                             margin-bottom: .2rem;
+                            position: relative;
 
                             &:before {
                                 content: "";
@@ -224,11 +237,18 @@ flex-shrink: 0;
 
 
                             }
+
+                            img {
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                            }
                         }
 
                         .giftMsg {
                             min-width: 2.2rem;
-                            padding:0 .1rem;
+                            padding: 0 .1rem;
                             height: .55rem;
                             border-radius: .245rem;
                             background-color: #fff100;

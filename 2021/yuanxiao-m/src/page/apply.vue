@@ -19,7 +19,8 @@
             </div>
         </div>
         <div class="guild-wrap">
-            <div data-v-3eaf9ae7="" class="switchList-box">
+            <div class="applyAnchors" v-if="true"></div>
+            <div v-else class="switchList-box">
                 <div @click="changeList(0)" class="switchListBtn" :class="selectIndex?'':'select'">饺子队主播</div>
                 <div @click="changeList(1)" class="switchListBtn" :class="selectIndex?'select':''">汤圆队主播</div>
             </div>
@@ -175,6 +176,14 @@
         .guild-wrap {
             @include themeWrap();
             margin-top: .8rem;
+
+            .applyAnchors {
+                margin: .2rem auto;
+                width: 2.48rem;
+                height: .37rem;
+                background-image: url("../assets/img/anchors.png");
+                background-size: 100% 100%;
+            }
 
             .switchList-box {
                 margin: -.36rem auto 0;
