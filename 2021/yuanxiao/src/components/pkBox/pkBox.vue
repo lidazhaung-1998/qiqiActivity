@@ -13,7 +13,7 @@
                         <div class="anchorname">
                             <div class="id">ID:{{item.anchorId1}}</div>
                             <div class="name">{{item.anchorName1 || "炫酷达人"}}</div>
-                            <div>{{team}}</div>
+                            <div></div>
                         </div>
                     </div>
                     <div class="winCount">{{item.score1}}</div>
@@ -29,7 +29,7 @@
                         <div class="anchorname">
                             <div class="id">ID:{{item.anchorId2}}</div>
                             <div class="name">{{item.anchorName2 || "炫酷达人"}}</div>
-                            <div>{{team}}</div>
+                            <div></div>
                         </div>
                     </div>
                     <div class="winCount">{{item.score2}}</div>
@@ -42,7 +42,7 @@
 <script>
     export default {
         name: "pkBox",
-        props: ["win", "pkList", "gameTiem", "theTeam"],
+        props: ["win", "pkList", "gameTiem", ],
         components: {},
         data() {
             return {
@@ -50,9 +50,6 @@
             }
         },
         computed: {
-            team() {
-                return this.theTeam ? "汤圆队" : "饺子队";
-            },
 
         },
         methods: {

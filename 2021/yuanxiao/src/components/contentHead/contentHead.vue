@@ -20,21 +20,26 @@
                 </div>
                 <div class="gift-box" v-else>
                     <div class="gift-content">
-                        <div class="giftImg"></div>
+                        <div class="giftImg">
+                            <img src="http://down.qxiu.com/pic/9426_9.png" alt="">
+
+                        </div>
                         <div class="giftMsg">饺子队100豆专属礼物</div>
                     </div>
                     <div class="gift-content">
-                        <div class="giftImg"></div>
+                        <div class="giftImg">
+                            <img src="http://down.qxiu.com/pic/9448_9.png" alt="">
+                        </div>
                         <div class="giftMsg">汤圆队100豆专属礼物</div>
                     </div>
                 </div>
-                <div class="ruletext">
+                <div class="ruletext" v-show="!isapply">
                     <div v-if="jackpotRule">
                         <div>注：饺子或汤圆礼物，哪款送得多用户就属于哪支队伍</div>
                     </div>
                     <div v-else>
-                        <div>在PK中收到本队专属礼物，正常增加PK积分</div>
-                        <div>收到非本队的专属礼物，则减少相应礼物<span class="imporant">价值一半</span>的积分</div>
+                        <div>主播在PK中每收到1个本队专属礼物，增加100PK票数</div>
+                        <div>每收到1个非本队的专属礼物，则减少50PK票数</div>
                     </div>
                 </div>
             </div>
@@ -45,7 +50,7 @@
 <script>
     export default {
         name: "contentHead",
-        props: ["jackpotRule"],
+        props: ["jackpotRule","isapply"],
         components: {},
         data() {
             return {}
@@ -102,6 +107,11 @@
                     text-align: center;
                     font-weight: 550;
                     line-height: 1.6;
+                    img{
+                        width: 55px;
+                        position: relative;
+                        top: 5px;
+                    }
                 }
 
                 .leftCircle {
@@ -214,6 +224,7 @@
                             box-shadow: 0 5px 0 0 #26298f;
                             position: relative;
                             margin-bottom: 20px;
+                            position: relative;
 
                             &:before {
                                 content: "";
@@ -226,6 +237,12 @@
                                 position: absolute;
                                 top: -1px;
                                 left: -1px;
+                            }
+                            img{
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%,-50%);
                             }
                         }
 
@@ -241,8 +258,12 @@
                             line-height: 49px;
                             font-width: bold;
                         }
-                        .richMedal{}
-                        .championMedal{}
+
+                        .richMedal {
+                        }
+
+                        .championMedal {
+                        }
                     }
                 }
 

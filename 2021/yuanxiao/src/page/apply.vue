@@ -1,7 +1,16 @@
 <template>
     <div class="apply-page">
         <div class="apply-context">
-            <div class="actGiftMsg"></div>
+
+            <div class="actGiftMsg">
+                <contentHead isapply="true">
+                    <div class="ruleTitle" slot="ruleTitle">
+                        <div class="leftCircle"></div>
+                        <div class="txt">在规定时间内收到任意一款活动专属礼物，即算报名成功。由系统随机分配主播所属队伍</div>
+                        <div class="rightCircle"></div>
+                    </div>
+                </contentHead>
+            </div>
             <div class="choseTeam"></div>
             <div class="showMyTeam">
                 <div v-if="!theTeam" class="team yuanxiao"></div>
@@ -9,7 +18,8 @@
             </div>
         </div>
         <div class="guild-wrap">
-            <div data-v-3eaf9ae7="" class="switchList-box">
+            <div class="applyAnchors" v-if="true"></div>
+            <div v-else class="switchList-box">
                 <div @click="changeList(0)" class="switchListBtn" :class="selectIndex?'':'select'">饺子队主播</div>
                 <div @click="changeList(1)" class="switchListBtn" :class="selectIndex?'select':''">汤圆队主播</div>
             </div>
@@ -36,11 +46,12 @@
 </template>
 
 <script>
+    import contentHead from "../components/contentHead/contentHead";
     import paginator from "../components/paginator/paginator";
 
     export default {
         name: "apply",
-        components: {paginator},
+        components: {paginator, contentHead},
         async created() {
             await this.checkAnchorIden();
             await this.getAnchors();
@@ -120,11 +131,9 @@
             padding-top: 140px;
 
             .actGiftMsg {
+                padding-top: 45px;
                 margin: 0 auto;
-                width: 889px;
-                height: 426px;
-                background-image: url("../assets/img/actGift.png");
-                background-size: 100% 100%;
+
             }
 
             .choseTeam {
@@ -165,6 +174,14 @@
         .guild-wrap {
             @include themeWrap();
             margin-top: 80px;
+
+            .applyAnchors {
+                margin: 20px auto;
+                width: 248px;
+                height: 37px;
+                background-image: url("../assets/img/anchors.png");
+                background-size: 100% 100%;
+            }
 
             .switchList-box {
                 margin: -36px auto 0;

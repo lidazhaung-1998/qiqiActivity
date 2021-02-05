@@ -70,7 +70,7 @@
 
             > div {
                 text-align: center;
-                width: 20%;
+                width: 21%;
                 white-space: nowrap;
             }
         }
