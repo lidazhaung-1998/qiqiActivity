@@ -153,7 +153,6 @@
 	var isAndroid = ua.indexOf('Android') > -1 || ua.indexOf('Adr') > -1; //android终端
 	var isiOS = !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 	var version = queryString('version');
-
 	function queryString(name) {
 		var query = window.location.search;
 		if (query) {
@@ -170,7 +169,6 @@
 		}
 		return null;
 	}
-
 	function toNum(a) {
 		a = a.toString();
 		var c = a.split('.');
@@ -183,7 +181,6 @@
 		var res = c.join('');
 		return res;
 	}
-
 	function compareVersion(a, b) {
 		var alen = a.split('.').length;
 		var blen = b.split('.').length;
@@ -209,8 +206,7 @@
 			$('#app').attr('class', 'app mss');
 		}
 	}
-
-	var mobileUrl = 'https://page.qxiu.com/activity/2020/newYearCenter-m/index.html' + window.location.search;
+	var mobileUrl = 'https://page.qxiu.com/activity/2021/yuanxiao-m/index.html' + window.location.search;
 	$('#app').click(function () {
 		if (isiOS) {
 			window.location.href = '#guagua://qiqi::9::2:' + encodeURIComponent(mobileUrl);
@@ -220,14 +216,69 @@
 	});
 
 
-	function get() {
-		$.ajax({
-			url: "//hot.active.qxiu.com/festival_common/newyearCRank2021/today",
-			type: "get",
-			async: true,
-			success: function (data) {
+	var ocontext = $('.context');
+	var anchorId = queryString('anchorId');
+	var iden = "";
+	var fns = {
+		stage0() {
+			setOcontext(
+					`<div>瓜分奖池</div>
+                <div>汤圆、饺子</div>
+                <div>闹元宵</div>`
+			);
+		},
+		stage1() {
+			ajax("", function (data) {
+				setOcontext(
+						`<div>瓜分奖池</div>
+                    <div>汤圆、饺子</div>
+                    <div>闹元宵</div>`
+				);
+			});
+		},
+		stage2() {
+			ajax("", function (data) {
+				setOcontext(
+						`<div>瓜分奖池</div>
+                    <div>汤圆、饺子</div>
+                    <div>闹元宵</div>`
+				);
+			});
+		},
+		stage3() {
+			ajax("", function (data) {
+				setOcontext(
+						`<div>瓜分奖池</div>
+                    <div>汤圆、饺子</div>
+                    <div>闹元宵</div>`
+				);
+			});
+		},
+	}
+	ajax("//hot-active.qxiu.com/festival_common/yuanXiaoStage01/anchorIden", getAnchorIden);
 
-			}
+	function getAnchorIden(data) {
+		iden = data.result ? "饺子队" : "汤圆队";
+		ajax("//hot-active.qxiu.com/festival_common/yuanXiaoStage01/anchorIden", getStage);
+	}
+
+	function getStage(data) {
+		data.result !== 0 && $('.teamName').show().html(iden);
+		var key = "stage" + data.result;
+		fns[key]();
+	}
+
+	function ajax(url, succFn) {
+		$.ajax({
+			url: url,
+			type: "GET",
+			async: true,
+			data: {anchorId: anchorId},
+			success: succFn
 		});
+	}
+
+	function setOcontext(tpl) {
+		ocontext.html(tpl);
 	}
 </script>
