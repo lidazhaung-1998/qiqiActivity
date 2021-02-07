@@ -14,12 +14,12 @@
             </div>
             <div class="choseTeam"></div>
             <div class="showMyTeam">
-                <div v-if="!theTeam" class="team yuanxiao"></div>
-                <div v-else class="team jiaozi"></div>
+                <div v-show="theTeam===0" class="team yuanxiao"></div>
+                <div v-show="theTeam===1" class="team jiaozi"></div>
             </div>
         </div>
         <div class="guild-wrap">
-            <div class="applyAnchors" v-if="true"></div>
+            <div class="applyAnchors" v-if="!grouped"></div>
             <div v-else class="switchList-box">
                 <div @click="changeList(0)" class="switchListBtn" :class="selectIndex?'':'select'">饺子队主播</div>
                 <div @click="changeList(1)" class="switchListBtn" :class="selectIndex?'select':''">汤圆队主播</div>
@@ -54,12 +54,15 @@
         name: "apply",
         components: {paginator, contentHead},
         async created() {
-            await this.checkAnchorIden();
-            await this.getAnchors();
+            await this.getGroupedState();
         },
         mounted() {
             this.timer = setInterval(async () => {
-                await this.getAnchors();
+                if (this.grouped) {
+                    await this.getAnchors();
+                } else {
+                    await this.getApplyAllAnchors();
+                }
             }, 10000);
         },
         beforeDestroy() {
@@ -67,11 +70,12 @@
         },
         data() {
             return {
+                grouped: false,
                 defaultHead: "http://static.qxiu.com/live/img/static/default818.png",
                 selectIndex: 0,
                 currPage: 0,
                 totalPage: 4,
-                theTeam: 0,
+                theTeam: -1,
                 anchorsList: [],
                 timer: null,
             }
@@ -93,6 +97,22 @@
             }
         },
         methods: {
+            async getGroupedState() {
+                let {data} = await this.$api.groupState("1");
+                if (data.result) {
+                    this.grouped = true;
+                    await this.getAnchors();
+                    await this.checkAnchorIden();
+                } else {
+                    await this.getApplyAllAnchors();
+                }
+            },
+            async getApplyAllAnchors() {
+                let {data} = await this.$api.allAnchors("1", this.currPage);
+                if (data.result) {
+                    this.setList(data);
+                }
+            },
             async checkAnchorIden() {
                 let {data} = await this.$api.anchorIden('1');
                 this.theTeam = data.result;
@@ -100,15 +120,20 @@
             async getAnchors() {
                 let {data} = await this.$api.anchors('1', this.sentType, this.currPage);
                 if (data.result) {
-                    this.anchorsList = data.result.list;
-                    this.totalPage = data.result.totalPage;
+                    this.setList(data);
                 }
+            },
+            setList(data) {
+                this.anchorsList = data.result.list;
+                this.totalPage = data.result.totalPage;
             },
             async prev() {
                 this.currPage--;
+                this.grouped ? await this.getAnchors() : await this.getApplyAllAnchors();
             },
             async next() {
                 this.currPage++;
+                this.grouped ? await this.getAnchors() : await this.getApplyAllAnchors();
             },
             async changeList(val) {
                 this.selectIndex = val;

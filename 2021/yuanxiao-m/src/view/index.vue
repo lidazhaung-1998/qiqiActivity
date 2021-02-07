@@ -65,7 +65,6 @@
         components: {YuanXiaoPK, rich},
         mounted() {
             window.addEventListener("scroll", this.scrollEvent);
-            // document.querySelector('.container').addEventListener("scroll", this.scrollEvent, true);
         },
         methods: {
             scrollEvent(ev) {
