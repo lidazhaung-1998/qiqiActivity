@@ -22,10 +22,10 @@
                             <span>{{item.scores}}</span>
                         </div>
                         <div class="allPKscore" v-show="more">
-                            <span>123456</span>
+                            <span>{{item.allTickets}}</span>
                         </div>
                         <div class="teamScore" v-show="more">
-                            <span>546</span>
+                            <span>{{item.type ? "饺子队" : "汤圆队" }}</span>
                         </div>
                         <!--                        这个是用户预计分红齐齐豆-->
                         <div class="divide" v-show="divide">

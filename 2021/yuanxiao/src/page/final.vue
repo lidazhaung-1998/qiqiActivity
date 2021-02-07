@@ -84,7 +84,7 @@
         methods: {
             async getFinalPKList() {
                 let {data} = await this.$api.finalPKList('4', (this.currDay - 1));
-                this.pkList = data.result;
+                this.pkList = data.result || [];
             },
             async getList() {
                 let {data} = await this.$api.finalGameRank('4', this.currPage);

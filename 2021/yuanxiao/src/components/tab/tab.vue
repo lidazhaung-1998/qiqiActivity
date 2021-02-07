@@ -17,11 +17,17 @@
     export default {
         name: "headers",
         props: ["tabs", "currPage"],
-        created() {},
+        created() {
+        },
         computed: {},
         data() {
             return {
                 selectIndex: this.currPage
+            }
+        },
+        watch: {
+            currPage(val) {
+                this.selectIndex = val;
             }
         },
         methods: {},

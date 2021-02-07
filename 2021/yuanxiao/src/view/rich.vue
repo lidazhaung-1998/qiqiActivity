@@ -23,6 +23,10 @@
         <div class="teamListTitle" :class="'teamListTitle'+selectIndex"></div>
         <list :list="list" :titles="titles" :divide="true"></list>
         <paginator @prev="prev" @next="next" :currPage="currPage" :totalPage="totalPage"></paginator>
+        <div class="myInfo" v-if="myInfo.length != 0">
+            <list :titles="myRankTitles" :list="myInfo" :divide="true"></list>
+        </div>
+
     </div>
 </template>
 
@@ -37,11 +41,13 @@
         async created() {
             await this.getList();
             await this.getAward();
+            await this.getRichInfo();
         },
         mounted() {
             this.timer = setInterval(async () => {
                 await this.getList();
                 await this.getAward();
+                await this.getRichInfo();
             }, 10000);
         },
         beforeDestroy() {
@@ -51,7 +57,7 @@
             return {
                 selectIndex: 0,
                 currPage: 0,
-                totalPage: 4,
+                totalPage: 0,
                 titles: [
                     "排名",
                     "昵称",
@@ -60,16 +66,24 @@
                     "预计可获得奖池豆数"
                 ],
                 list: [],
+                myRankTitles: [
+                    "我的排名",
+                    "昵称",
+                    "ID",
+                    "贡献饺子数",
+                    "预计可获得奖池豆数"
+                ],
+                myInfo: [],
                 details: 0,
                 timer: null,
             }
         },
         watch: {
             async selectIndex(val) {
-                if(val===0){
-                        this.$set(this.titles,3,"贡献饺子数")
-                } else{
-this.$set(this.titles,3,"贡献汤圆数")
+                if (val === 0) {
+                    this.$set(this.titles, 3, "贡献饺子数")
+                } else {
+                    this.$set(this.titles, 3, "贡献汤圆数")
                 }
                 this.currPage = 0;
                 await this.getList();
@@ -86,8 +100,14 @@ this.$set(this.titles,3,"贡献汤圆数")
             }
         },
         methods: {
+            async getRichInfo() {
+                let {data} = await this.$api.richInfo();
+                this.myInfo = [];
+                if (data.result) {
+                    this.myInfo.push(data.result);
+                }
+            },
             async getList() {
-                let url = this.selectIndex === 0 ? "promotedRank" : "finalAnchorRank";
                 let {data} = await this.$api.richRank(this.sentType, this.currPage)
                 if (data.result) {
                     this.totalPage = data.result.totalPage;
@@ -131,6 +151,10 @@ this.$set(this.titles,3,"贡献汤圆数")
 
         .teamListTitle1 {
             background-image: url("../assets/img/tangyuanteamRich.png");
+        }
+
+        .myInfo {
+            margin-top: 30px;
         }
     }
 </style>

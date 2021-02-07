@@ -1,12 +1,15 @@
 import axios from "./http";
 
 const base = {
-    // newYear: "//hot-active.qxiu.com/festival_common/newyearCRank2021/",
-    // http://192.168.25.130:8080
-    yuanxiao: "/data/yuanXiaoStage0",
-    // yuanxiao: "http://hot.active.qxiu.com/festival_common/yuanXiaoStage01",
-    // rich: "http://hot.active.qxiu.com/festival_common/yuandanall/",
-    rich: "/data/"
+    // 本地测试
+    // yuanxiao: "/data/yuanXiaoStage0",
+    // rich: "/data/"
+    // 联调
+    // yuanxiao: "http://192.168.25.130:8080/festival_common/yuanXiaoStage0",
+    // rich: "http://192.168.25.130:8080/festival_common/yuandanall/",
+    // 内网测试
+    yuanxiao: "//hot-active.qxiu.com/festival_common/yuanXiaoStage0",
+    rich: "//hot-active.qxiu.com/festival_common/yuandanall/",
     // https://hot-active.qxiu.com
 };
 const api = {
@@ -18,8 +21,8 @@ const api = {
     },
     allAnchors(step, page) {
         return axios.get(base.yuanxiao + step + "/allAnchors", {
-            params:{
-                page:page
+            params: {
+                page: page
             }
         })
     },
@@ -80,10 +83,18 @@ const api = {
             }
         })
     },
-    richRank(page) {
+    richRank(type,page) {
         return axios.get(base.rich + "userRank", {
             params: {
-                type: page
+                type:type,
+                page: page
+            }
+        })
+    },
+    richInfo() {
+        return axios.get(base.rich + "userInfo", {
+            params: {
+                userId: true
             }
         })
     }

@@ -41,6 +41,7 @@
         },
         data() {
             return {
+                defaultHead: "http://static.qxiu.com/live/img/static/default818.png",
                 selectIndex: 0,
                 pkList: [],
                 timer: null,
@@ -63,7 +64,7 @@
         methods: {
             async getpkList() {
                 let {data} = await this.$api.knockoutPKList('3', this.sentType);
-                this.pkList = data.result;
+                this.pkList = data.result || [];
             },
 
         }

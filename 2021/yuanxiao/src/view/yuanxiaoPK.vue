@@ -34,7 +34,7 @@
         },
         data() {
             return {
-                selectIndex: 0,
+                selectIndex: -1,
                 tabs: [
                     {
                         id: 0,
