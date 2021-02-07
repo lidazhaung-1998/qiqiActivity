@@ -26,6 +26,11 @@
                 selectIndex: this.currPage
             }
         },
+        watch:{
+          currPage(val){
+              this.selectIndex = val;
+          }
+        },
         methods: {},
 
     }

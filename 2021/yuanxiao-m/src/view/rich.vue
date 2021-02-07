@@ -19,6 +19,9 @@
         <div class="teamListTitle" :class="'teamListTitle'+selectIndex"></div>
         <list :list="list" :titles="titles" :divide="true"></list>
         <paginator @prev="prev" @next="next" :currPage="currPage" :totalPage="totalPage"></paginator>
+        <div class="myInfo" v-if="myInfo.length != 0">
+            <list :list="myInfo" :titles="myRankTitles" :divide="true"></list>
+        </div>
     </div>
 </template>
 
@@ -33,6 +36,7 @@
         async created() {
             await this.getList();
             await this.getAward();
+            await this.getRichInfo();
         },
         mounted() {
             this.timer = setInterval(async () => {
@@ -56,6 +60,14 @@
                     "预计可获得奖池豆数"
                 ],
                 list: [],
+                myRankTitles: [
+                    "我的排名",
+                    "昵称",
+                    "ID",
+                    "贡献饺子数",
+                    "预计可获得奖池豆数"
+                ],
+                myInfo: [],
                 details:0,
                 timer: null,
             }
@@ -82,8 +94,14 @@
             }
         },
         methods: {
+            async getRichInfo() {
+                let {data} = await this.$api.richInfo();
+                this.myInfo = [];
+                if (data.result) {
+                    this.myInfo.push(data.result);
+                }
+            },
             async getList() {
-                let url = this.selectIndex === 0 ? "promotedRank" : "finalAnchorRank";
                 let {data} = await this.$api.richRank(this.sentType, this.currPage)
                 if (data.result) {
                     this.totalPage = data.result.totalPage;
@@ -127,6 +145,9 @@
 
         .teamListTitle1 {
             background-image: url("../assets/img/tangyuanteamRich.png");
+        }
+        .myInfo{
+            margin-top: .3rem;
         }
     }
 </style>

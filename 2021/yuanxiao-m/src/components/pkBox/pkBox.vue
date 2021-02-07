@@ -1,49 +1,52 @@
 <template>
     <div class="twentyPKContent">
-        <div class="pk-box" v-for="item in pkList">
-            <div v-show="gameTime" class="gameDate">{{item.startTime}}</div>
-            <div class="pkDetails-wrap">
-                <div class="pkAnchor leftAnchor" :class="item.win === 1 ? win : '' ">
-                    <div class="anchorInfo">
-                        <div class="anchorHead" :class="item.state1 === 2 ? 'live' : '' "
-                             @click="toRoom(item.state1,item.roomId1)">
-                            <img :src="item.anchorPic1 || defaultHead" alt="">
+        <div v-if="pkList.length != 0">
+            <div class="pk-box" v-for="item in pkList">
+                <div v-show="gameTime" class="gameDate">{{item.startTime}}</div>
+                <div class="pkDetails-wrap">
+                    <div class="pkAnchor leftAnchor" :class="item.win === 1 ? win : '' ">
+                        <div class="anchorInfo">
+                            <div class="anchorHead" :class="item.state1 === 2 ? 'live' : '' "
+                                 @click="toRoom(item.state1,item.roomId1)">
+                                <img :src="item.anchorPic1 || defaultHead" alt="">
+                            </div>
+                            <div class="anchorname">
+                                <div class="id">ID:{{item.anchorId1}}</div>
+                                <div class="name">{{item.anchorName1 || "炫酷达人"}}</div>
+                                <div></div>
+                            </div>
                         </div>
-                        <div class="anchorname">
-                            <div class="id">ID:{{item.anchorId1}}</div>
-                            <div class="name">{{item.anchorName1 || "炫酷达人"}}</div>
-                            <div></div>
-                        </div>
+                        <div class="winCount">{{item.score1}}</div>
                     </div>
-                    <div class="winCount">{{item.score1}}</div>
-                </div>
-                <div class="center"></div>
-                <div class="pkAnchor rightAnchor" :class="item.win === 2 ? win : '' ">
-                    <div class="anchorInfo">
-                        <div class="anchorHead" :class="item.state2 === 2 ? 'live' : '' "
-                             @click="toRoom(item.state2,item.roomId2)">
-                            <img :src="item.anchorPic2 || defaultHead" alt="">
+                    <div class="center"></div>
+                    <div class="pkAnchor rightAnchor" :class="item.win === 2 ? win : '' ">
+                        <div class="anchorInfo">
+                            <div class="anchorHead" :class="item.state2 === 2 ? 'live' : '' "
+                                 @click="toRoom(item.state2,item.roomId2)">
+                                <img :src="item.anchorPic2 || defaultHead" alt="">
+                            </div>
+                            <div class="anchorname">
+                                <div class="id">ID:{{item.anchorId2}}</div>
+                                <div class="name">{{item.anchorName2 || "炫酷达人"}}</div>
+                                <div></div>
+                            </div>
                         </div>
-                        <div class="anchorname">
-                            <div class="id">ID:{{item.anchorId2}}</div>
-                            <div class="name">{{item.anchorName2 || "炫酷达人"}}</div>
-                            <div></div>
-                        </div>
+                        <div class="winCount">{{item.score2}}</div>
                     </div>
-                    <div class="winCount">{{item.score2}}</div>
                 </div>
             </div>
         </div>
+        <div class="notPk" v-else>暂无对阵，敬请期待</div>
     </div>
 </template>
 
 <script>
     export default {
         name: "pkBox",
-        props:{
-            win:String,
-            gameTime:String,
-            pkList:Array
+        props: {
+            win: String,
+            gameTime: String,
+            pkList: Array
         },
         components: {},
         data() {
@@ -51,9 +54,7 @@
                 defaultHead: "http://static.qxiu.com/live/img/static/default818.png"
             }
         },
-        computed: {
-
-        },
+        computed: {},
         methods: {
             toRoom(state, roomid) {
                 if (state === 2 && roomid) {
@@ -72,6 +73,11 @@
     @import "../../assets/css/mixin";
 
     .twentyPKContent {
+        .notPk {
+            font-width: bold;
+            font-size: .23rem;
+            text-align: center;
+        }
 
         .pk-box:last-child {
             padding-bottom: 0;

@@ -8,7 +8,9 @@
                 <ul class="list">
                     <li class="item" v-for="(item,index) in list">
                         <div class="rank">
-                            <div class="rankimg" :class="item.rankNo || item.rank < 4 ? 'rankimg'+(index+1) : '' ">{{item.rankNo || item.rank}}</div>
+                            <div class="rankimg" :class="item.rankNo || item.rank < 4 ? 'rankimg'+(index+1) : '' ">
+                                {{item.rankNo || item.rank}}
+                            </div>
                         </div>
                         <div class="name">
                             <span>{{item.anchorName || item.userNickName}}</span>
@@ -19,14 +21,14 @@
                         <div class="CardiacValue">
                             <span>{{item.scores}}</span>
                         </div>
-<!--                        总PK积分-->
+                        <!--                        总PK积分-->
                         <div class="allPKscore" v-show="more">
-                            <span>123456</span>
+                            <span>{{item.allTickets}}</span>
                         </div>
                         <div class="teamScore" v-show="more">
-                            <span>546</span>
+                            <span>{{item.type ? "饺子队" : "汤圆队"}}</span>
                         </div>
-<!--                        预计分成-->
+                        <!--                        预计分成-->
                         <div class="divide" v-show="divide">
                             <span>{{item.award}}</span>
                         </div>
@@ -66,7 +68,8 @@
             font-size: .22rem;
             display: flex;
             justify-content: space-around;
-        align-items: center;
+            align-items: center;
+
             > div {
                 text-align: center;
                 width: 20%;

@@ -36,7 +36,7 @@
                             ID:{{item.anchorId}}
                         </div>
                         <div class="ellipsis anchorName">
-                            昵称:{{item.anchorName}}
+                            昵称:{{item.anchorName || "炫酷达人"}}
                         </div>
                     </div>
                 </div>

@@ -2,25 +2,42 @@ module.exports = {
     publicPath: './',
     productionSourceMap: false,
     devServer: {
-        // proxy:'http://192.168.25.130:8080',
+        proxy:'http://192.168.25.130:8080',
         before(app) {
-            app.get('/data/state',function(req,res){
-                res.send( {
+            app.get('/data/userInfo', function (req, res) {
+                res.send({
+                    "errcode": 0,
+                    "result": {
+                        "award": 1,
+                        "rank": 1,
+                        "scores": 1000,
+                        "timeStamp": 0,
+                        "type": 0,
+                        "userId": 0,
+                        "userNickName": "科技所大",
+                        "userPic": ""
+                    },
+                    "errmsg": "",
+                    "status": 200
+                })
+            })
+            app.get('/data/state', function (req, res) {
+                res.send({
                     "errcode": 0,
                     "result": 0,
                     "errmsg": "",
                     "status": 200
                 })
             })
-            app.get("/data/yuanXiaoStage01/grouped",function (req,res) {
-                res.send( {
+            app.get("/data/yuanXiaoStage01/grouped", function (req, res) {
+                res.send({
                     "errcode": 0,
                     "result": false,
                     "errmsg": "",
                     "status": 200
                 })
             })
-            app.get('/data/yuanXiaoStage01/allAnchors',function (req,res) {
+            app.get('/data/yuanXiaoStage01/allAnchors', function (req, res) {
                 res.send({
                     "errcode": 0,
                     "result": {
@@ -39,7 +56,7 @@ module.exports = {
                                 "ancPic": "http://qiqi-resource.qxiu.com/op/2018/01/12/6d213dec5cee4ce283f90c0414db41ee.jpg",
                                 "anchorId": 369661,
                                 "anchorName": "全部",
-                                "rankNo":2,
+                                "rankNo": 2,
                                 "roomId": 0,
                                 "scores": 0,
                                 "state": 0,
