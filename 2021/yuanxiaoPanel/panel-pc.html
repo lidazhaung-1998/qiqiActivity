@@ -61,32 +61,35 @@
 </head>
 
 <body>
-<div id="app">
-    <div class="content">
+    <div id="app">
+        <div class="content">
 
-        <div class="info">
-            <div class="teamName">饺子队</div>
-            <div class="context">
-                <!-- <div class="">PK连胜场次</div>
+            <div class="info">
+                <div class="teamName">饺子队</div>
+                <div class="context">
+
+                    <div>瓜分奖池</div>
+                    <div>汤圆、饺子</div>
+                    <div>闹元宵</div>
+
+                    <!-- <div class="">PK连胜场次</div>
                 <div class="">55</div>
                 <div class="">排名:139</div> -->
 
-                <!--                                <div>瓜分奖池</div>-->
-                <!--                                <div>汤圆、饺子</div>-->
-                <!--                                <div>闹元宵</div>-->
 
-                <!-- <div>当前奖池:</div>
-            <div>99999999豆</div> -->
 
-                <!-- <div>PK总胜场:</div>
-                <div>99</div>
-                <div>排名:199</div> -->
+                    <!-- <div>当前奖池:</div>
+                    <div>99999999豆</div> -->
+
+                    <!-- <div>PK总胜场:</div>
+                    <div>99</div>
+                    <div>排名:199</div> -->
+
+
+                </div>
             </div>
-
-
         </div>
     </div>
-</div>
 </body>
 
 </html>
@@ -116,7 +119,8 @@
 
     var ocontext = $('.context');
     var anchorId = queryString('anchorId');
-    var iden = "";
+    var iden = "",
+        idenIndex = 0;
     var fns = {
         stage0() {
             setOcontext(
@@ -126,29 +130,35 @@
             );
         },
         stage1() {
-            ajax("", function (data) {
+            ajax("//hot-active.qxiu.com/festival_common/yuanXiaoStage02/getwinstreakinfo", function (data) {
+                if (data.result) {
+                    var content = data.result;
+                }
                 setOcontext(
-                    `<div>瓜分奖池</div>
-                    <div>汤圆、饺子</div>
-                    <div>闹元宵</div>`
+                    `<div class="">PK连胜场次</div>
+                    <div class="">${content.scores || 0}</div>
+                    <div class="">排名:${content.rankNo || 0}</div>`
                 );
             });
         },
         stage2() {
+            var url = "http://hot.active.qxiu.com/festival_common/yuandanall/awardPool?type=" + idenIndex;
             ajax("", function (data) {
                 setOcontext(
-                    `<div>瓜分奖池</div>
-                    <div>汤圆、饺子</div>
-                    <div>闹元宵</div>`
+                    `<div>当前奖池:</div>
+                    <div>${data.result}豆</div>`
                 );
             });
         },
         stage3() {
-            ajax("", function (data) {
+            ajax("//hot-active.qxiu.com/festival_common/yuanXiaoStage04/anchorInfo", function (data) {
+                if (data.result) {
+                    var content = data.result;
+                }
                 setOcontext(
-                    `<div>瓜分奖池</div>
-                    <div>汤圆、饺子</div>
-                    <div>闹元宵</div>`
+                    `<div>PK总胜场:</div>
+                    <div>${content.scores || 0}</div>
+                    <div>排名:${content.rankNo || 0}</div>`
                 );
             });
         },
@@ -156,12 +166,13 @@
     ajax("//hot-active.qxiu.com/festival_common/yuanXiaoStage01/anchorIden", getAnchorIden);
 
     function getAnchorIden(data) {
+        idenIndex = data.result;
         iden = data.result ? "饺子队" : "汤圆队";
-        ajax("//hot-active.qxiu.com/festival_common/yuanXiaoStage01/anchorIden", getStage);
+        ajax("//hot-active.qxiu.com/festival_common/yuandanall/state", getStage);
     }
 
     function getStage(data) {
-        data.result !== 0 && $('.teamName').show().html(iden);
+        data.result != 0 && $('.teamName').show().html(iden);
         var key = "stage" + data.result;
         fns[key]();
     }
@@ -171,7 +182,9 @@
             url: url,
             type: "GET",
             async: true,
-            data: {anchorId: anchorId},
+            data: {
+                anchorId: anchorId
+            },
             success: succFn
         });
     }
@@ -179,4 +192,7 @@
     function setOcontext(tpl) {
         ocontext.html(tpl);
     }
+    setInterval(function () {
+        ajax("//hot-active.qxiu.com/festival_common/yuandanall/state", getStage);
+    }, 10000)
 </script>
