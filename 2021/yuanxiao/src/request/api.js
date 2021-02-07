@@ -10,6 +10,19 @@ const base = {
     // https://hot-active.qxiu.com
 };
 const api = {
+    actState() {
+        return axios.get(base.rich + 'state');
+    },
+    groupState(step) {
+        return axios.get(base.yuanxiao + step + "/grouped");
+    },
+    allAnchors(step, page) {
+        return axios.get(base.yuanxiao + step + "/allAnchors", {
+            params:{
+                page:page
+            }
+        })
+    },
     // step 是yuanXiaoStage0 （1|2|3|4）
     anchors(step, type, page) {
         return axios.get(base.yuanxiao + step + "/anchors", {

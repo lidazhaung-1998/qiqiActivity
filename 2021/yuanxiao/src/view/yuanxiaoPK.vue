@@ -20,6 +20,13 @@
     export default {
         name: "yuanxiaoPK",
         components: {tabs, apply, promoted, knockout, final},
+        async created() {
+            let {data} = await this.$api.actState();
+            if (data.result > 3) {
+                data.result = 3;
+            }
+            this.selectIndex = data.result;
+        },
         methods: {
             pvTab(index) {
                 this.selectIndex = index;
