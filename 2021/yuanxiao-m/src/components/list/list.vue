@@ -8,7 +8,7 @@
                 <ul class="list" v-if="list.length != 0">
                     <li class="item" v-for="(item,index) in list">
                         <div class="rank">
-                            <div class="rankimg" :class="item.rankNo || item.rank < 4 ? 'rankimg'+(index+1) : '' ">
+                            <div class="rankimg" :class="(item.rankNo || item.rank) < 4 ? 'rankimg'+(index+1) : '' ">
                                 {{item.rankNo || item.rank}}
                             </div>
                         </div>
@@ -75,7 +75,7 @@
 
             > div {
                 text-align: center;
-                width: 20%;
+                width: 22%;
                 line-height: 1.3;
                 /*white-space: nowrap;*/
             }
