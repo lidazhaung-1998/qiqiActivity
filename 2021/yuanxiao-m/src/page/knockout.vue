@@ -3,8 +3,8 @@
         <div class="outGameSwitch-wrap">
             <content-head>
                 <div class="listSwitch-wrap" slot="switch">
-                    <div class="tab" :class="selectIndex===0?'active':''" @click="selectIndex=0">饺子队</div>
-                    <div class="tab" :class="selectIndex===1?'active':''" @click="selectIndex=1">汤圆队</div>
+                    <div class="tab" :class="selectIndex===0?'active':''" @click="selectIndex=0">汤圆队</div>
+                    <div class="tab" :class="selectIndex===1?'active':''" @click="selectIndex=1">饺子队</div>
                 </div>
                 <div class="ruleTitle" slot="ruleTitle">
                     <div class="txt">队内二十强主播两两随机分配进行PK，3局2胜决出晋级名额
@@ -23,10 +23,11 @@
 <script>
     import contentHead from "../components/contentHead/contentHead";
     import pkBox from "../components/pkBox/pkBox";
+
     export default {
         name: "knockout",
         props: [],
-        components: {contentHead,pkBox},
+        components: {contentHead, pkBox},
         async created() {
             await this.getpkList();
         },
@@ -42,7 +43,7 @@
             return {
                 selectIndex: 0,
                 pkList: [],
-                timer:null,
+                timer: null,
             }
         },
         watch: {
@@ -53,9 +54,9 @@
         computed: {
             sentType() {
                 if (this.selectIndex === 0) {
-                    return 1;
-                } else {
                     return 0;
+                } else {
+                    return 1;
                 }
             }
         },

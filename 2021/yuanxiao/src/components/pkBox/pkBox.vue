@@ -176,11 +176,11 @@
                         border-radius: 50%;
                         box-sizing: border-box;
                         border: 4px solid #fff;
-                        overflow: hidden;
                         position: relative;
 
                         img {
                             width: 100%;
+                            border-radius: 50%;
                         }
                     }
 
@@ -191,8 +191,8 @@
                     .live:before {
                         content: "";
                         position: absolute;
-                        right: 7px;
-                        bottom: 9px;
+                        right: -4px;
+                        bottom: -5px;
                         width: 17px;
                         height: 17px;
                         background-image: url("../../assets/img/live.gif");

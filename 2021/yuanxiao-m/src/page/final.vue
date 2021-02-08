@@ -11,13 +11,13 @@
                     <div class="gift-box" slot="slotAward">
                         <div class="gift-content">
                             <div class="giftImg">
-<!--                                <img src="http://down.qxiu.com/pic/9448_7.png" alt="">-->
+                                <img class="medal1" src="../assets/img/123.png" alt="">
                             </div>
                             <div class="giftMsg">专属勋章</div>
                         </div>
                         <div class="gift-content">
                             <div class="giftImg">
-                                <img src="http://down.qxiu.com/pic/9448_7.png" alt="">
+                                <img class="iphone" src="../assets/img/iPhon12.png" alt="">
                             </div>
                             <div class="giftMsg">iPhone12一台</div>
                         </div>

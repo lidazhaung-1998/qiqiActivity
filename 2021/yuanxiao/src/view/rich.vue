@@ -1,9 +1,11 @@
 <template>
     <div class="divideAward-wrap">
         <contentHead :jackpotRule="true">
+            <img slot="richMedal1" :src="richMedal1" alt="">
+            <img slot="richMedal2" :src="richMedal2" alt="">
             <div class="listSwitch-wrap" slot="switch">
-                <div class="tab" :class="selectIndex===0?'active':''" @click="selectIndex=0">饺子队主播</div>
-                <div class="tab" :class="selectIndex===1?'active':''" @click="selectIndex=1">汤圆队主播</div>
+                <div class="tab" :class="selectIndex===0?'active':''" @click="selectIndex=0">汤圆队主播</div>
+                <div class="tab" :class="selectIndex===1?'active':''" @click="selectIndex=1">饺子队主播</div>
             </div>
             <div class="jackpotTitle" slot="jackpotTitle" :class="'jackpotTitle'+selectIndex"></div>
             <div class="jackpotDetail" slot="jackpotDetail">
@@ -12,11 +14,9 @@
             </div>
             <div class="ruleTitle" slot="ruleTitle">
                 <div class="txt">
-                    报名资格赛结束后，主播收到的两款活动专属礼物总价值的20%，将记入所属队伍奖池
-                    <br/>
-                    在PK决赛后，获胜总冠军主播所属队伍排名前50的用户
-                    <br/>
-                    将按贡献比例瓜分本方以及对方队伍的奖池，并获得专属勋章
+                    用户送给参赛主播的饺子、汤圆礼物总价值的20%，将分别记入饺子队、汤圆队奖池，<br/>
+                    PK决赛冠军主播所在队伍的所有用户，将按贡献比例瓜分75%的两队总奖池，获得勋章，<br/>
+                    另一队所有用户则能瓜分25%的两队总奖池
                 </div>
             </div>
         </contentHead>
@@ -26,7 +26,6 @@
         <div class="myInfo" v-if="myInfo.length != 0">
             <list :titles="myRankTitles" :list="myInfo" :divide="true"></list>
         </div>
-
     </div>
 </template>
 
@@ -34,7 +33,10 @@
     import contentHead from "../components/contentHead/contentHead";
     import list from "../components/list/list";
     import paginator from "../components/paginator/paginator";
-
+    import tangyuanMedal1 from "../assets/img/tangyuanshenhaoleft.png";
+    import tangyuanMedal2 from "../assets/img/tangyuanshenhaoright.png";
+    import jiaoziMedal1 from "../assets/img/jiaozishenhaoleft.png";
+    import jiaoziMedal2 from "../assets/img/jiaozishenhaoright.png";
     export default {
         name: "rich",
         components: {contentHead, list, paginator},
@@ -62,7 +64,7 @@
                     "排名",
                     "昵称",
                     "ID",
-                    "贡献饺子数",
+                    "贡献汤圆数",
                     "预计可获得奖池豆数"
                 ],
                 list: [],
@@ -70,20 +72,26 @@
                     "我的排名",
                     "昵称",
                     "ID",
-                    "贡献饺子数",
+                    "贡献汤圆数",
                     "预计可获得奖池豆数"
                 ],
                 myInfo: [],
                 details: 0,
+                richMedal1: tangyuanMedal1,
+                richMedal2: tangyuanMedal2,
                 timer: null,
             }
         },
         watch: {
             async selectIndex(val) {
                 if (val === 0) {
-                    this.$set(this.titles, 3, "贡献饺子数")
+                    this.$set(this.titles, 3, "贡献汤圆数");
+                    this.richMedal1 = tangyuanMedal1;
+                    this.richMedal2 = tangyuanMedal2;
                 } else {
-                    this.$set(this.titles, 3, "贡献汤圆数")
+                    this.$set(this.titles, 3, "贡献饺子数");
+                    this.richMedal1 = jiaoziMedal1;
+                    this.richMedal2 = jiaoziMedal2;
                 }
                 this.currPage = 0;
                 await this.getList();
@@ -93,9 +101,9 @@
         computed: {
             sentType() {
                 if (this.selectIndex === 0) {
-                    return 1;
-                } else {
                     return 0;
+                } else {
+                    return 1;
                 }
             }
         },
@@ -112,7 +120,9 @@
                 if (data.result) {
                     this.totalPage = data.result.totalPage;
                     this.list = data.result.list;
+                    return ;
                 }
+                this.list = [];
             },
             async getAward() {
                 let {data} = await this.$api.richDivide(this.sentType);
@@ -145,11 +155,11 @@
             background-size: 100% 100%;
         }
 
-        .teamListTitle0 {
+        .teamListTitle1 {
             background-image: url("../assets/img/jiaoziteamRich.png");
         }
 
-        .teamListTitle1 {
+        .teamListTitle0 {
             background-image: url("../assets/img/tangyuanteamRich.png");
         }
 

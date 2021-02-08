@@ -2,7 +2,7 @@ module.exports = {
     publicPath: './',
     productionSourceMap: false,
     devServer: {
-        proxy:'http://192.168.25.130:8080',
+        // proxy:'http://192.168.25.130:8080',
         before(app) {
             app.get('/data/userInfo', function (req, res) {
                 res.send({

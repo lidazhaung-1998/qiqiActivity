@@ -21,8 +21,8 @@
         <div class="guild-wrap">
             <div class="applyAnchors" v-if="!grouped"></div>
             <div v-else class="switchList-box">
-                <div @click="changeList(0)" class="switchListBtn" :class="selectIndex?'':'select'">饺子队主播</div>
-                <div @click="changeList(1)" class="switchListBtn" :class="selectIndex?'select':''">汤圆队主播</div>
+                <div @click="changeList(0)" class="switchListBtn" :class="selectIndex?'':'select'">汤圆队主播</div>
+                <div @click="changeList(1)" class="switchListBtn" :class="selectIndex?'select':''">饺子队主播</div>
             </div>
             <div class="teamAnchorList-wrap">
                 <div class="anchorInfo-box" v-for="item in anchorsList">
@@ -90,9 +90,9 @@
         computed: {
             sentType() {
                 if (this.selectIndex === 0) {
-                    return 1;
-                } else {
                     return 0;
+                } else {
+                    return 1;
                 }
             }
         },
@@ -277,19 +277,19 @@
                             border-radius: 50%;
                             border: 0.05rem solid #ffffff;
                             background-size: 100% 100%;
-                            overflow: hidden;
                             position: relative;
 
                             img {
                                 width: 100%;
+                                border-radius: 50%;
                             }
                         }
 
                         .live:before {
                             content: "";
                             position: absolute;
-                            right: .09rem;
-                            bottom: .09rem;
+                            right: 0;
+                            bottom: -.04rem;
                             width: .17rem;
                             height: .17rem;
                             background-image: url("../assets/img/live2.gif");

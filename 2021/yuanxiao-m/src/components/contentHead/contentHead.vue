@@ -10,27 +10,30 @@
                 <slot name="slotAward"></slot>
                 <div class="gift-box" v-if="jackpotRule">
                     <div class="gift-content">
-                        <div class="giftImg richMedal"></div>
+                        <div class="giftImg richMedal">
+                            <slot name="richMedal1"></slot>
+                        </div>
                         <div class="giftMsg">冠军队神豪勋章</div>
                     </div>
                     <div class="gift-content">
-                        <div class="giftImg championMedal"></div>
+                        <div class="giftImg championMedal">
+                            <slot name="richMedal2"></slot>
+                        </div>
                         <div class="giftMsg">冠军队专属勋章</div>
                     </div>
                 </div>
                 <div class="gift-box" v-else>
                     <div class="gift-content">
                         <div class="giftImg">
-
-                            <img src="http://down.qxiu.com/pic/9426_7.png" alt="">
-                        </div>
-                        <div class="giftMsg">饺子队100豆专属礼物</div>
-                    </div>
-                    <div class="gift-content">
-                        <div class="giftImg">
                             <img src="http://down.qxiu.com/pic/9448_7.png" alt="">
                         </div>
                         <div class="giftMsg">汤圆队100豆专属礼物</div>
+                    </div>
+                    <div class="gift-content">
+                        <div class="giftImg">
+                            <img src="http://down.qxiu.com/pic/9426_7.png" alt="">
+                        </div>
+                        <div class="giftMsg">饺子队100豆专属礼物</div>
                     </div>
                 </div>
                 <div class="ruletext" v-show="!isapply">
@@ -39,7 +42,7 @@
                     </div>
                     <div v-else>
                         <div>主播在PK中每收到1个本队专属礼物，增加100PK票数</div>
-                        <div>每收到1个非本队的专属礼物，则减少50PK票数</div>
+                        <div>每收到1个非本队的专属礼物，则减少100PK票数</div>
                     </div>
                 </div>
             </div>
@@ -50,7 +53,7 @@
 <script>
     export default {
         name: "contentHead",
-        props: ["jackpotRule", "isapply"],
+        props: ["jackpotRule", "isapply","richMedal1","richMedal2"],
         components: {},
         data() {
             return {}
@@ -183,11 +186,11 @@
                 background-size: 100% 100%;
             }
 
-            .jackpotTitle0 {
+            .jackpotTitle1 {
                 background-image: url("../../assets/img/jiaoziteamAward.png");
             }
 
-            .jackpotTitle1 {
+            .jackpotTitle0 {
                 background-image: url("../../assets/img/tangyuanteamAward.png");
 
             }
@@ -244,6 +247,16 @@
                                 left: 50%;
                                 transform: translate(-50%, -50%);
                             }
+
+                            .medal1 {
+                                width: 2.6rem;
+                            }
+
+                            .iphone {
+                                width: 1.1rem;
+                                height: 1.1rem;
+
+                            }
                         }
 
                         .giftMsg {
@@ -261,9 +274,15 @@
                         }
 
                         .richMedal {
+                            img{
+                                width: 1.6rem;
+                            }
                         }
 
                         .championMedal {
+                            img{
+                                width: 1.6rem;
+                            }
                         }
                     }
                 }

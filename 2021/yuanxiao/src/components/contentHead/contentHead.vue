@@ -10,27 +10,30 @@
                 <slot name="slotAward"></slot>
                 <div class="gift-box" v-if="jackpotRule">
                     <div class="gift-content">
-                        <div class="giftImg richMedal"></div>
+                        <div class="giftImg richMedal">
+                            <slot name="richMedal1"></slot>
+                        </div>
                         <div class="giftMsg">冠军队神豪勋章</div>
                     </div>
                     <div class="gift-content">
-                        <div class="giftImg championMedal"></div>
+                        <div class="giftImg championMedal">
+                            <slot name="richMedal2"></slot>
+                        </div>
                         <div class="giftMsg">冠军队专属勋章</div>
                     </div>
                 </div>
                 <div class="gift-box" v-else>
                     <div class="gift-content">
                         <div class="giftImg">
-                            <img src="http://down.qxiu.com/pic/9426_9.png" alt="">
-
-                        </div>
-                        <div class="giftMsg">饺子队100豆专属礼物</div>
-                    </div>
-                    <div class="gift-content">
-                        <div class="giftImg">
                             <img src="http://down.qxiu.com/pic/9448_9.png" alt="">
                         </div>
                         <div class="giftMsg">汤圆队100豆专属礼物</div>
+                    </div>
+                    <div class="gift-content">
+                        <div class="giftImg">
+                            <img src="http://down.qxiu.com/pic/9426_9.png" alt="">
+                        </div>
+                        <div class="giftMsg">饺子队100豆专属礼物</div>
                     </div>
                 </div>
                 <div class="ruletext" v-show="!isapply">
@@ -184,11 +187,11 @@
                 background-size: 100% 100%;
             }
 
-            .jackpotTitle0 {
+            .jackpotTitle1 {
                 background-image: url("../../assets/img/jiaoziteamAward.png");
             }
 
-            .jackpotTitle1 {
+            .jackpotTitle0 {
                 background-image: url("../../assets/img/tangyuanteamAward.png");
 
             }
@@ -243,6 +246,9 @@
                                 top: 50%;
                                 left: 50%;
                                 transform: translate(-50%,-50%);
+                            }
+                            .medal{
+                                width: 208px;
                             }
                         }
 

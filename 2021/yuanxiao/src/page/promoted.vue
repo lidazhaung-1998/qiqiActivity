@@ -3,8 +3,8 @@
         <div class="promoted-wrap">
             <content-head>
                 <div class="listSwitch-wrap" slot="switch">
-                    <div class="tab" :class="selectIndex===0?'active':''" @click="selectIndex=0">饺子队主播</div>
-                    <div class="tab" :class="selectIndex===1?'active':''" @click="selectIndex=1">汤圆队主播</div>
+                    <div class="tab" :class="selectIndex===0?'active':''" @click="selectIndex=0">汤圆队主播</div>
+                    <div class="tab" :class="selectIndex===1?'active':''" @click="selectIndex=1">饺子队主播</div>
                 </div>
                 <div class="ruleTitle" slot="ruleTitle">
                     <div class="leftCircle"></div>
@@ -49,7 +49,7 @@
                     "排名",
                     "昵称",
                     "ID",
-                    "连胜场次"
+                    "最高连胜场次"
                 ],
                 list: [],
                 timer: null,
@@ -58,9 +58,9 @@
         computed: {
             sentType() {
                 if (this.selectIndex === 0) {
-                    return 1;
-                } else {
                     return 0;
+                } else {
+                    return 1;
                 }
             }
         },
@@ -76,7 +76,9 @@
                 if (data.result) {
                     this.totalPage = data.result.totalPage;
                     this.list = data.result.list;
+                    return;
                 }
+                this.list = [];
             },
             async prev() {
                 this.currPage--;

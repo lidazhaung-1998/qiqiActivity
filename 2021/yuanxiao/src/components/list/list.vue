@@ -5,21 +5,21 @@
                 <div v-for="item in titles">{{item}}</div>
             </div>
             <div class="list-content">
-                <ul class="list">
-                    <li class="item" v-for="(item,index) in list">
+                <ul class="list" v-if="list.length != 0">
+                    <li class="item"  v-for="(item,index) in list">
                         <div class="rank">
                             <div class="rankimg" :class="item.rankNo < 4 || item.rank ? 'rankimg'+(index+1) : '' ">
                                 {{item.rankNo || item.rank}}
                             </div>
                         </div>
                         <div class="name">
-                            <span>{{item.anchorName || item.userNickName}}</span>
+                            <span>{{item.anchorName || item.userNickName || "炫酷达人"}}</span>
                         </div>
                         <div class="uid">
                             <span>{{item.anchorId || item.userId}}</span>
                         </div>
                         <div class="CardiacValue">
-                            <span>{{item.scores}}</span>
+                            <span>{{item.scores || 0}}</span>
                         </div>
                         <div class="allPKscore" v-show="more">
                             <span>{{item.allTickets}}</span>
@@ -32,6 +32,9 @@
                             <span>{{item.award}}</span>
                         </div>
                     </li>
+                </ul>
+                <ul class="list" v-else>
+                    <li class="item" style="align-items: center">暂无数据</li>
                 </ul>
             </div>
         </div>

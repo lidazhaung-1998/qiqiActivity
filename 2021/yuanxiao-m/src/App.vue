@@ -13,7 +13,6 @@
 </script>
 
 <style lang="scss">
-
     html,body{
         width: 100%;
         overflow-x: hidden;
