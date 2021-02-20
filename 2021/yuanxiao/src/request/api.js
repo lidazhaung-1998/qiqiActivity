@@ -3,7 +3,7 @@ import axios from "./http";
 const base = {
     // 本地测试
     // yuanxiao: "/data/yuanXiaoStage0",
-    // rich: "/data/"
+    // rich: "/data/",
     // 联调
     // yuanxiao: "http://192.168.25.130:8080/festival_common/yuanXiaoStage0",
     // rich: "http://192.168.25.130:8080/festival_common/yuandanall/",
@@ -74,7 +74,9 @@ const api = {
             }
         });
     },
-
+    gameindex(step) {
+        return axios.get(base.yuanxiao  + step + '/gameindex');
+    },
 
     richDivide(type, page) {
         return axios.get(base.rich + "awardPool", {
@@ -97,6 +99,9 @@ const api = {
                 userId: true
             }
         })
+    },
+    checkover() {
+        return axios.get(base.rich + "over")
     }
 }
 export default api;

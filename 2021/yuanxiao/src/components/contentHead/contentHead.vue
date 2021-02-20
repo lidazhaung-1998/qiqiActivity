@@ -19,7 +19,7 @@
                         <div class="giftImg championMedal">
                             <slot name="richMedal2"></slot>
                         </div>
-                        <div class="giftMsg">冠军队专属勋章</div>
+                        <div class="giftMsg">冠军队前10专属勋章</div>
                     </div>
                 </div>
                 <div class="gift-box" v-else>
@@ -42,7 +42,7 @@
                     </div>
                     <div v-else>
                         <div>主播在PK中每收到1个本队专属礼物，增加100PK票数</div>
-                        <div>每收到1个非本队的专属礼物，则减少50PK票数</div>
+                        <div>每收到1个非本队的专属礼物，则减少100PK票数</div>
                     </div>
                 </div>
             </div>

@@ -15,8 +15,8 @@
             <div class="ruleTitle" slot="ruleTitle">
                 <div class="txt">
                     用户送给参赛主播的饺子、汤圆礼物总价值的20%，将分别记入饺子队、汤圆队奖池，<br/>
-                    PK决赛冠军主播所在队伍的所有用户，将按贡献比例瓜分75%的两队总奖池，获得勋章，<br/>
-                    另一队所有用户则能瓜分25%的两队总奖池
+                    PK决赛冠军主播所在队伍的所有用户，将按贡献比例瓜分两队总奖池的75%，获得勋章，<br/>
+                    另一队所有用户则能瓜分两队总奖池的25%
                 </div>
             </div>
         </contentHead>
@@ -41,6 +41,7 @@
         name: "rich",
         components: {contentHead, list, paginator},
         async created() {
+            await this.getOverInfo();
             await this.getList();
             await this.getAward();
             await this.getRichInfo();
@@ -108,11 +109,22 @@
             }
         },
         methods: {
+            async getOverInfo() {
+                let {data} = await this.$api.checkover();
+                if (data.result) {
+                    this.$set(this.titles, 4, "已获得奖池豆数");
+                    this.$set(this.myRankTitles, 4, "已获得奖池豆数");
+                }else {
+                    this.$set(this.titles, 4, "预计可获得奖池豆数");
+                    this.$set(this.myRankTitles, 4, "预计可获得奖池豆数");
+                }
+            },
             async getRichInfo() {
                 let {data} = await this.$api.richInfo();
                 this.myInfo = [];
                 if (data.result) {
                     this.myInfo.push(data.result);
+                    this.$set(this.myRankTitles, 3, data.result.type == 0 ? "贡献汤圆数" : "贡献饺子数");
                 }
             },
             async getList() {

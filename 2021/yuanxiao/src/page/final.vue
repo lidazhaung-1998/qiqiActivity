@@ -5,9 +5,11 @@
                 <content-head>
                     <div class="ruleTitle" slot="ruleTitle">
                         <div class="txt">每位主播将与对方队伍的10位主播分别进行一场PK，单局定胜负<br/>
-                            按照主播总胜场数进行排名，决出最后的总冠军
+                            按照主播总胜场数进行排名，决出最后的总冠军<br/>
+                            排名第2-20名的主播，将获得礼物奖励
                         </div>
                     </div>
+
                     <div slot="awardtitle" class="awardtitle"></div>
                     <div class="gift-box" slot="slotAward">
                         <div class="gift-content">
@@ -28,7 +30,11 @@
         </div>
         <div class="turns-wrap">
             <pagination @change="switchDateTab" :currDay="currDay" :total="totalDay"></pagination>
-            <pkBox :pkList="pkList" win="win2"></pkBox>
+            <pkBox :pkList="pkList" win="win2" team="true"></pkBox>
+        </div>
+        <div class="rewards-wrap">
+            <div class="rewardsTitle"></div>
+            <div class="rewardsImg"></div>
         </div>
         <div class="allWinList-wrap">
             <div class="allWinRankTitle"></div>
@@ -50,7 +56,8 @@
         props: [],
         components: {contentHead, pagination, pkBox, paginator, list},
         async created() {
-            await this.getFinalPKList();
+            // await this.getFinalPKList();
+            await this.getgameindex();
             await this.getList();
         },
         mounted() {
@@ -91,6 +98,14 @@
                 if (data.result) {
                     this.list = data.result;
                     // this.totalPage = data.result.totalPage;
+                }
+            },
+            async getgameindex() {
+                let {data} = await this.$api.gameindex('4');
+                if (data.result) {
+                    this.currDay = parseInt(data.result+1);
+                }else {
+                    this.currDay = 1;
                 }
             },
             async switchDateTab(val) {
@@ -137,6 +152,23 @@
                 width: 228px;
                 height: 37px;
                 background-image: url("../assets/img/allWinRank.png");
+            }
+        }
+
+        .rewards-wrap{
+            @include themeWrap();
+            margin-top: 30px;
+            .rewardsTitle {
+                margin: 20px auto 10px;
+                width: 228px;
+                height: 37px;
+                background-image: url("../assets/img/rewardsTitle.png");
+            }
+            .rewardsImg{
+                margin: 20px auto 10px;
+                width: 513px;
+                height: 282px;
+                background-image: url("../assets/img/rewardsImg.png");
             }
         }
 

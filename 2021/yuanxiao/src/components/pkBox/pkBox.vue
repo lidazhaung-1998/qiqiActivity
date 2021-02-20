@@ -1,20 +1,20 @@
 <template>
     <div class="twentyPKContent">
         <div v-if="pkList.length != 0">
-            <div class="pk-box" v-for="item in pkList">
+            <div class="pk-box" v-for="(item,index) in pkList">
                 <div class="gameDate" v-show="gameTiem">{{item.startTime}}</div>
                 <div class="pkDetails-wrap">
                     <div class="leftAnchor" :class="item.win === 1 ? win : '' ">
                         <div class="anchorInfo ">
                             <div class="anchorHead"
                                  :class="item.state1 == 2 ? 'live' : '' "
-                                 @click="toRoom(item.state1,item.roomId2)">
+                                 @click="toRoom(item.state1,item.roomId1)">
                                 <img :src="item.anchorPic1 || defaultHead" alt="">
                             </div>
                             <div class="anchorname">
                                 <div class="id">ID:{{item.anchorId1}}</div>
                                 <div class="name">{{item.anchorName1 || "炫酷达人"}}</div>
-                                <div></div>
+                                <div class="type" v-show="team">{{item.type1 == 0 ? '汤圆队' : '饺子队'}}</div>
                             </div>
                         </div>
                         <div class="winCount">{{item.score1}}</div>
@@ -32,7 +32,7 @@
                             <div class="anchorname">
                                 <div class="id">ID:{{item.anchorId2}}</div>
                                 <div class="name">{{item.anchorName2 || "炫酷达人"}}</div>
-                                <div></div>
+                                <div class="type" v-show="team">{{item.type2 == 0 ? '汤圆队' : '饺子队'}}</div>
                             </div>
 
                         </div>
@@ -48,14 +48,16 @@
 <script>
     export default {
         name: "pkBox",
-        props: ["win", "pkList", "gameTiem",],
+        props: ["win", "pkList", "gameTiem","team"],
         components: {},
         data() {
             return {
-                defaultHead: "http://static.qxiu.com/live/img/static/default818.png"
+                defaultHead: "http://static.qxiu.com/live/img/static/default818.png",
             }
         },
-        computed: {},
+        computed: {
+
+        },
         methods: {
             toRoom(state, roomid) {
                 if (state == 2 && roomid) {
@@ -72,11 +74,12 @@
     .twentyPKContent {
         box-sizing: border-box;
         padding: 0 130px;
-
+        background:url("../../assets/img/pkbg_02.png") top center repeat-y;
         .notPK {
             font-size: 20px;
             font-weight: bold;
             text-align: center;
+            line-height: 175px;
         }
 
         .pk-box:last-child {
@@ -199,7 +202,7 @@
                     }
 
                     .anchorname {
-                        width: 120px;
+                        width: 140px;
                         color: #Fff;
                         font-size: 20px;
 
@@ -208,6 +211,9 @@
                             overflow: hidden;
                             text-overflow: ellipsis;
                             width: 100%;
+                        }
+                        .name{
+                            width: 120px;
                         }
                     }
                 }

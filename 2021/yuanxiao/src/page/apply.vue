@@ -5,7 +5,7 @@
                 <contentHead isapply="true">
                     <div class="ruleTitle" slot="ruleTitle">
                         <div class="leftCircle"></div>
-                        <div class="txt">在规定时间内收到任意一款活动专属礼物，即算报名成功。由系统随机分配主播所属队伍</div>
+                        <div class="txt">在规定时间内（2月21日00:00-2月22日22:00）收到任意一款活动专属礼物，即算报名成功，随后将由系统随机分配主播所属队伍</div>
                         <div class="rightCircle"></div>
                     </div>
                 </contentHead>
@@ -94,6 +94,7 @@
             }
         },
         methods: {
+
             async getGroupedState() {
                 let {data} = await this.$api.groupState("1");
                 if (data.result) {
@@ -104,16 +105,19 @@
                     await this.getApplyAllAnchors();
                 }
             },
+
             async getApplyAllAnchors() {
                 let {data} = await this.$api.allAnchors("1", this.currPage);
                 if (data.result) {
                     this.setList(data);
                 }
             },
+
             async checkAnchorIden() {
                 let {data} = await this.$api.anchorIden('1');
                 this.theTeam = data.result;
             },
+
             async getAnchors() {
                 let {data} = await this.$api.anchors('1', this.sentType, this.currPage);
                 if (data.result) {

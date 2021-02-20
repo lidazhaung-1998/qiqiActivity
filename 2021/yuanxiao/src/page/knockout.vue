@@ -7,8 +7,8 @@
                     <div class="tab" :class="selectIndex===1?'active':''" @click="selectIndex=1">饺子队</div>
                 </div>
                 <div class="ruleTitle" slot="ruleTitle">
-                    <div class="txt">队内二十强主播两两随机分配进行PK，3局2胜决出晋级名额<br/>
-                        获胜的主播均可获得 <img src="http://down.qxiu.com/pic/9259_9.png" alt="豪华游艇" title="豪华游艇"> 礼物1个
+                    <div class="txt">队内二十强主播两两随机分配进行PK，3局2胜决出晋级名额
+<!--                        获胜的主播均可获得 <img src="http://down.qxiu.com/pic/9259_9.png" alt="豪华游艇" title="豪华游艇"> 礼物1个-->
                     </div>
                 </div>
             </content-head>
@@ -83,12 +83,16 @@
         .twentyPK-wrap {
             margin: 30px auto 0;
             width: 1003px;
-            height: 2439px;
-            background-image: url("../assets/img/pkbg.png");
+            /*height: 2439px;*/
+            min-height:305px;
+            padding-bottom: 190px;
+            /*background-image: url("../assets/img/pkbg.png");*/
+            background:url("../assets/img/pkbg_01.png") top center no-repeat,
+            url("../assets/img/pkbg_03.png") bottom center no-repeat;
             overflow: hidden;
 
             .twentyPK-title {
-                margin: 40px auto;
+                margin: 48px auto;
                 width: 283px;
                 height: 37px;
                 background-image: url("../assets/img/twentyPKtitle.png");
