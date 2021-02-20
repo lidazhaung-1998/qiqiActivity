@@ -6,7 +6,7 @@
                     <div class="ruleTitle" slot="ruleTitle">
                         <div class="leftCircle"></div>
                         <div class="txt">
-                            在规定时间内收到任意一款活动专属礼物， <br/>即算报名成功由系统随机分配主播所属队伍
+                            在规定时间内（2月21日00:00-2月22日22:00）收到任意一款活动专属礼物，即算报名成功，随后将由系统随机分配主播所属队伍
                         </div>
                         <div class="rightCircle"></div>
                     </div>

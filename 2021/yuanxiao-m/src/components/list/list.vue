@@ -14,6 +14,7 @@
                         </div>
                         <div class="name">
                             <span>{{item.anchorName || item.userNickName || "炫酷达人"}}</span>
+<!--                            <span>{{item.anchorId || item.userId}}</span>-->
                         </div>
                         <div class="uid">
                             <span>{{item.anchorId || item.userId}}</span>
@@ -35,7 +36,7 @@
                     </li>
                 </ul>
                 <ul class="list" v-else>
-                    <li class="item" style="align-items: center;">暂无数据</li>
+                    <li class="item" style="align-items: center;justify-content: space-around;">暂无数据</li>
                 </ul>
             </div>
         </div>
@@ -79,6 +80,9 @@
                 line-height: 1.3;
                 /*white-space: nowrap;*/
             }
+            div:first-child{
+                /*width: 12%;*/
+            }
         }
 
         .list-content {
@@ -102,12 +106,14 @@
                         width: 20%;
                         text-align: center;
                         line-height: .57rem;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
+                        /*white-space: nowrap;*/
+                        /*overflow: hidden;*/
+                        /*text-overflow: ellipsis;*/
+                        /*margin: 0 0.3rem;*/
                     }
 
                     .rank {
+                        /*width: 12%;*/
                         line-height: .34rem;
                         margin-top: .115rem;
                         background-size: 100% 100%;
@@ -141,6 +147,9 @@
 
 
                     .name {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
 
                     .uid {

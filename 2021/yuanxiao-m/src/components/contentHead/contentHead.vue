@@ -19,7 +19,7 @@
                         <div class="giftImg championMedal">
                             <slot name="richMedal2"></slot>
                         </div>
-                        <div class="giftMsg">冠军队专属勋章</div>
+                        <div class="giftMsg">冠军队前10专属勋章</div>
                     </div>
                 </div>
                 <div class="gift-box" v-else>

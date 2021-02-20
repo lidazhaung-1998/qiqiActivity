@@ -8,14 +8,16 @@
                 </div>
                 <div class="ruleTitle" slot="ruleTitle">
                     <div class="txt">队内二十强主播两两随机分配进行PK，3局2胜决出晋级名额
-                        获胜的主播均可获得<img src="http://down.qxiu.com/pic/9259_7.png" alt="豪华游艇" title="豪华游艇">礼物1个
+<!--                        获胜的主播均可获得<img src="http://down.qxiu.com/pic/9259_7.png" alt="豪华游艇" title="豪华游艇">礼物1个-->
                     </div>
                 </div>
             </content-head>
         </div>
         <div class="twentyPK-wrap">
+            <div class="twentyPK-wrap-top"></div>
             <div class="twentyPK-title"></div>
-            <pkBox :pkList="pkList" win="win" gameTime="true"></pkBox>
+            <pkBox :pkList="pkList" win="win" gameTime="true" isborder="true"></pkBox>
+            <div class="twentyPK-wrap-bottom"></div>
         </div>
     </div>
 </template>
@@ -79,21 +81,34 @@
         }
 
         .twentyPK-wrap {
+            position: relative;
             margin: .3rem auto 0;
             width: 7.23rem;
-            height: 24.39rem;
-            background-image: url("../assets/img/pkbg.png");
-            background-size: 100% 100%;
+            /*height: 24.39rem;*/
+            /*background-image: url("../assets/img/pkbg.png");*/
+            /*background-size: 100% 100%;*/
             overflow: hidden;
 
             .twentyPK-title {
+                position: relative;
                 margin: .4rem auto;
                 width: 2.83rem;
                 height: .37rem;
                 background-image: url("../assets/img/twentyPKtitle.png");
                 background-size: 100% 100%;
             }
-
+            .twentyPK-wrap-top{
+                position: absolute;
+                width: 7.23rem;
+                height: 3.66rem;
+                background:url("../assets/img/pkbg_01.png") top center no-repeat;
+                background-size: 100% 100%;
+            }
+            .twentyPK-wrap-bottom{
+                height: 1.9rem;
+                background:url("../assets/img/pkbg_03.png") top center no-repeat;
+                background-size: 100% 100%;
+            }
 
         }
     }

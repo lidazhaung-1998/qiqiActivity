@@ -1,5 +1,5 @@
 <template>
-    <div class="twentyPKContent">
+    <div class="twentyPKContent" :class="isborder ? 'hasborder' : ''">
         <div v-if="pkList.length != 0">
             <div class="pk-box" v-for="item in pkList">
                 <div v-show="gameTime" class="gameDate">{{item.startTime}}</div>
@@ -13,7 +13,7 @@
                             <div class="anchorname">
                                 <div class="id">ID:{{item.anchorId1}}</div>
                                 <div class="name">{{item.anchorName1 || "炫酷达人"}}</div>
-                                <div></div>
+                                <div class="type" v-show="team">{{item.type1 == 0 ? '汤圆队' : '饺子队'}}</div>
                             </div>
                         </div>
                         <div class="winCount">{{item.score1}}</div>
@@ -28,7 +28,7 @@
                             <div class="anchorname">
                                 <div class="id">ID:{{item.anchorId2}}</div>
                                 <div class="name">{{item.anchorName2 || "炫酷达人"}}</div>
-                                <div></div>
+                                <div class="type" v-show="team">{{item.type2 == 0 ? '汤圆队' : '饺子队'}}</div>
                             </div>
                         </div>
                         <div class="winCount">{{item.score2}}</div>
@@ -46,6 +46,8 @@
         props: {
             win: String,
             gameTime: String,
+            isborder: String,
+            team: String,
             pkList: Array
         },
         components: {},
@@ -73,8 +75,10 @@
     @import "../../assets/css/mixin";
 
     .twentyPKContent {
+        position: relative;
         .notPk {
-            font-width: bold;
+            line-height: 1.5rem;
+            font-weight: bold;
             font-size: .23rem;
             text-align: center;
         }
@@ -182,17 +186,33 @@
                         box-sizing: border-box;
                         border: 0.04rem solid #fff;
                         position: relative;
-                        overflow: hidden;
+                        /*overflow: hidden;*/
 
                         img {
                             position: absolute;
                             top: 0;
                             width: 100%;
+                            border-radius: 50%;
                         }
                     }
 
+                    .live {
+                        cursor: pointer;
+                    }
+
+                    .live:before {
+                        content: "";
+                        position: absolute;
+                        right: 0;
+                        bottom: -0.03rem;
+                        width: 0.2rem;
+                        height: 0.2rem;
+                        background-image: url("../../assets/img/live2.gif");
+                        background-size: 100% 100%;
+                    }
+
                     .anchorname {
-                        width: 1.3rem;
+                        width: 1.5rem;
                         color: #Fff;
                         font-size: .21rem;
 
@@ -202,11 +222,18 @@
                             text-overflow: ellipsis;
                             width: 100%;
                         }
+                        .name{
+                            width: 1.2rem;
+                        }
                     }
                 }
 
 
             }
         }
+    }
+    .hasborder{
+        background:url("../../assets/img/pkbg_02.png") top center repeat-y;
+        background-size: 100% 100%;
     }
 </style>

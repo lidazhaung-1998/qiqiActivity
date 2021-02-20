@@ -74,6 +74,9 @@ const api = {
             }
         });
     },
+    gameindex(step) {
+        return axios.get(base.yuanxiao  + step + '/gameindex');
+    },
 
 
     richDivide(type, page) {
@@ -97,6 +100,9 @@ const api = {
                 userId: true
             }
         })
+    },
+    checkover() {
+        return axios.get(base.rich + "over")
     }
 }
 export default api;

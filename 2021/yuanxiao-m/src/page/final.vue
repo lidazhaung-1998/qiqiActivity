@@ -4,7 +4,7 @@
             <div class="explan">
                 <content-head>
                     <div class="ruleTitle" slot="ruleTitle">
-                        <div class="txt">每位主播将与对方队伍的10位主播分别进行一场PK，单局定胜负按照主播总胜场数进行排名，决出最后的总冠军
+                        <div class="txt">每位主播将与对方队伍的10位主播分别进行一场PK，单局定胜负按照主播总胜场数进行排名，决出最后的总冠军，排名第2-20名的主播，将获得礼物奖励
                         </div>
                     </div>
                     <div slot="awardtitle" class="awardtitle"></div>
@@ -27,7 +27,11 @@
         </div>
         <div class="turns-wrap">
             <pagination @change="switchDateTab" :currDay="currDay" :total="totalDay"></pagination>
-            <pkBox :pkList="pkList" win="win2"></pkBox>
+            <pkBox :pkList="pkList" win="win2" team="true"></pkBox>
+        </div>
+        <div class="rewards-wrap">
+            <div class="rewardsTitle"></div>
+            <div class="rewardsImg"></div>
         </div>
         <div class="allWinList-wrap">
             <div class="allWinRankTitle"></div>
@@ -49,7 +53,8 @@
         props: [],
         components: {contentHead, pagination, pkBox, paginator, list},
         async created() {
-            await this.getFinalPKList();
+            // await this.getFinalPKList();
+            await this.getgameindex();
             await this.getList();
         },
         mounted() {
@@ -90,6 +95,14 @@
                 if (data.result) {
                     this.list = data.result;
                     // this.totalPage = data.result.totalPage;
+                }
+            },
+            async getgameindex() {
+                let {data} = await this.$api.gameindex('4');
+                if (data.result) {
+                    this.currDay = parseInt(data.result+1);
+                }else {
+                    this.currDay = 1;
                 }
             },
             async switchDateTab(val) {
@@ -135,6 +148,25 @@
                 width: 2.28rem;
                 height: .37rem;
                 background-image: url("../assets/img/allWinRank.png");
+                background-size: 100% 100%;
+            }
+        }
+
+        .rewards-wrap{
+            @include themeWrap();
+            margin-top: 30px;
+            .rewardsTitle {
+                margin: 0.2rem auto 0.1rem;
+                width: 2.28rem;
+                height: 0.37rem;
+                background-image: url("../assets/img/rewardsTitle.png");
+                background-size: 100% 100%;
+            }
+            .rewardsImg{
+                margin: 0.2rem auto 0.1rem;
+                width: 5.13rem;
+                height: 2.82rem;
+                background-image: url("../assets/img/rewardsImg.png");
                 background-size: 100% 100%;
             }
         }
